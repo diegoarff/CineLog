@@ -13,7 +13,9 @@ const Login = () => {
       <Text onPress={() => router.replace("/(auth)/register")}>
         Go to register
       </Text>
-      <TouchableOpacity onPress={onLogin}>Login</TouchableOpacity>
+      <TouchableOpacity onPress={onLogin}>
+        <Text>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 };

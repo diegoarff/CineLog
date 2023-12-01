@@ -11,7 +11,9 @@ const Register = () => {
     <View>
       <Text>Register</Text>
       <Text onPress={() => router.replace("/(auth)/login")}>Go to login</Text>
-      <TouchableOpacity onPress={onRegister}>Register</TouchableOpacity>
+      <TouchableOpacity onPress={onRegister}>
+        <Text>Register</Text>
+      </TouchableOpacity>
     </View>
   );
 };
