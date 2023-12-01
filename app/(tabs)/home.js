@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
 import { useRouter } from "expo-router";
 
-const home = () => {
+const Home = () => {
   const router = useRouter();
 
   const movies = [
@@ -26,6 +25,7 @@ const home = () => {
       ))}
 
       <Text style={styles.heading}>Trending shows</Text>
+      <Text onPress={() => router.push("/shows")}>View all shows</Text>
       {shows.map((show) => (
         <Text key={show.id} onPress={() => router.push(`/shows/${show.id}`)}>
           {show.title}
@@ -35,7 +35,7 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
 
 const styles = StyleSheet.create({
   heading: {

@@ -2,21 +2,20 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-const MovieDetails = () => {
-  const { movieId } = useLocalSearchParams();
+const ShowDetails = () => {
+  const { id } = useLocalSearchParams();
   const router = useRouter();
 
   return (
     <View>
-      <Text>MovieDetails of {movieId}</Text>
-
-      <Text onPress={() => router.push(`/movies/${movieId}/reviews`)}>
-        See reviews
+      <Text>ShowDetails of {id}</Text>
+      <Text onPress={() => router.push(`/shows/${id}/reviews`)}>
+        See the reviews
       </Text>
     </View>
   );
 };
 
-export default MovieDetails;
+export default ShowDetails;
 
 const styles = StyleSheet.create({});

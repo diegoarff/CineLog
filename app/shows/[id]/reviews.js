@@ -2,8 +2,8 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-const MovieReviews = () => {
-  const { movieId } = useLocalSearchParams();
+const ShowReviews = () => {
+  const { id } = useLocalSearchParams();
   const router = useRouter();
 
   const reviews = [
@@ -23,11 +23,11 @@ const MovieReviews = () => {
 
   return (
     <View>
-      <Text>You are seeing the reviews of the movie: {movieId}</Text>
+      <Text>You are seeing the reviews of the show: {id}</Text>
       {reviews.map((review) => (
         <Text
           key={review.id}
-          onPress={() => router.push(`/movies/${movieId}/reviews/${review.id}`)}
+          onPress={() => router.push(`/reviews/${review.id}`)}
         >
           {review.title}
         </Text>
@@ -36,6 +36,6 @@ const MovieReviews = () => {
   );
 };
 
-export default MovieReviews;
+export default ShowReviews;
 
 const styles = StyleSheet.create({});
