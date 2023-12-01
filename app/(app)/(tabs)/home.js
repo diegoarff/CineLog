@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 
+import { heading, red } from "../../../styles/global";
+
 const Home = () => {
   const router = useRouter();
   const { onLogout } = useAuth();
@@ -18,7 +20,7 @@ const Home = () => {
 
   return (
     <View>
-      <Text style={styles.heading}>Trending movies</Text>
+      <Text style={[heading, red]}>Trending movies</Text>
       <Text onPress={() => router.push("/movies")}>View all movies</Text>
       {movies.map((movie) => (
         <Text key={movie.id} onPress={() => router.push(`/movies/${movie.id}`)}>
@@ -26,25 +28,16 @@ const Home = () => {
         </Text>
       ))}
 
-      <Text style={styles.heading}>Trending shows</Text>
+      <Text style={heading}>Trending shows</Text>
       <Text onPress={() => router.push("/shows")}>View all shows</Text>
       {shows.map((show) => (
         <Text key={show.id} onPress={() => router.push(`/shows/${show.id}`)}>
           {show.title}
         </Text>
       ))}
-      <TouchableOpacity onPress={onLogout}>
-        Example Logout
-      </TouchableOpacity>
+      <TouchableOpacity onPress={onLogout}>Example Logout</TouchableOpacity>
     </View>
   );
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  heading: {
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-});
