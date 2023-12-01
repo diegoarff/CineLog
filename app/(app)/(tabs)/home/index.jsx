@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-import { useAuth } from "../../../context/AuthContext";
 
-import { heading, red } from "../../../styles/global";
+import { heading, red } from "../../../../styles/global";
+import { useAuth } from "../../../../context/AuthContext";
 
 const Home = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <View>
       <Text style={[heading, red]}>Trending movies</Text>
-      <Text onPress={() => router.push("/movies")}>View all movies</Text>
+      <Text onPress={() => router.push("/home/movies")}>View all movies</Text>
       {movies.map((movie) => (
         <Text key={movie.id} onPress={() => router.push(`/movies/${movie.id}`)}>
           {movie.title}
@@ -29,7 +29,7 @@ const Home = () => {
       ))}
 
       <Text style={heading}>Trending shows</Text>
-      <Text onPress={() => router.push("/shows")}>View all shows</Text>
+      <Text onPress={() => router.push("/home/shows")}>View all shows</Text>
       {shows.map((show) => (
         <Text key={show.id} onPress={() => router.push(`/shows/${show.id}`)}>
           {show.title}
