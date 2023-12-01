@@ -1,11 +1,12 @@
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
+import { AuthProvider } from "../context/AuthContext";
 
-const StackLayout = () => {
+const Root = () => {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <AuthProvider>
+      <Slot />
+    </AuthProvider>
   );
 };
 
-export default StackLayout;
+export default Root;

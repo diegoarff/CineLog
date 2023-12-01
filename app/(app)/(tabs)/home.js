@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useAuth } from "../../../context/AuthContext";
 
 const Home = () => {
   const router = useRouter();
+  const { onLogout } = useAuth();
 
   const movies = [
     { id: "a2948d", title: "Star Wars" },
@@ -31,6 +33,9 @@ const Home = () => {
           {show.title}
         </Text>
       ))}
+      <TouchableOpacity onPress={onLogout}>
+        Example Logout
+      </TouchableOpacity>
     </View>
   );
 };
