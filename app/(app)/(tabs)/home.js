@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../../context/AuthContext";
 
@@ -35,7 +35,9 @@ const Home = () => {
           {show.title}
         </Text>
       ))}
-      <TouchableOpacity onPress={onLogout}>Example Logout</TouchableOpacity>
+      <TouchableOpacity onPress={onLogout}>
+        <Text>Example Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };

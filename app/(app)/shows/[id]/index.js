@@ -1,19 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { StyleSheet } from "react-native";
+import { useLocalSearchParams } from "expo-router";
+import DetailsScreen from "../../../../screens/DetailsScreen";
 
 const ShowDetails = () => {
   const { id } = useLocalSearchParams();
-  const router = useRouter();
 
-  return (
-    <View>
-      <Text>ShowDetails of {id}</Text>
-      <Text onPress={() => router.push(`/shows/${id}/reviews`)}>
-        See the reviews
-      </Text>
-    </View>
-  );
+  return <DetailsScreen type="shows" id={id} />;
 };
 
 export default ShowDetails;
