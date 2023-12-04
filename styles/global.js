@@ -1,6 +1,6 @@
 export const heading = {
   fontSize: 30,
-  fontWeight: "bold",
+  fontFamily: "Inter_700Bold",
 };
 
 export const red = {

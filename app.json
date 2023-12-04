@@ -1,13 +1,19 @@
 {
   "expo": {
-    "scheme": "acme",
+    "name": "cinelog",
+    "slug": "cinelog",
+    "scheme": "cinelog",
+    "version": "1.0.0",
+    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0A"
+    },
     "web": {
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router"
-    ],
-    "name": "cinelog",
-    "slug": "cinelog"
+    "plugins": ["expo-router"]
   }
 }
