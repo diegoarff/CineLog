@@ -5,7 +5,7 @@ const AuthLayout = () => {
   const { token } = useAuth();
 
   if (token) {
-    return <Redirect href="/" />;
+    return <Redirect href="(app)" />;
   }
 
   return <Stack />;

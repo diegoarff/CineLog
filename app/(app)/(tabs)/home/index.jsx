@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
-import { heading, red } from "../../../../styles/global";
 import { useAuth } from "../../../../context/AuthContext";
 
 const Home = () => {
@@ -20,7 +19,7 @@ const Home = () => {
 
   return (
     <View>
-      <Text style={[heading, red]}>Trending movies</Text>
+      <Text className="text-4xl font-interBold text-red-500">Trending movies</Text>
       <Text onPress={() => router.push("/home/movies")}>View all movies</Text>
       {movies.map((movie) => (
         <Text key={movie.id} onPress={() => router.push(`/movies/${movie.id}`)}>
@@ -28,7 +27,7 @@ const Home = () => {
         </Text>
       ))}
 
-      <Text style={heading}>Trending shows</Text>
+      <Text className="text-4xl">Trending shows</Text>
       <Text onPress={() => router.push("/home/shows")}>View all shows</Text>
       {shows.map((show) => (
         <Text key={show.id} onPress={() => router.push(`/shows/${show.id}`)}>

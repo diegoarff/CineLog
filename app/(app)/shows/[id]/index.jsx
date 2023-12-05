@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import DetailsScreen from "../../../../screens/DetailsScreen";
 
@@ -10,4 +9,3 @@ const ShowDetails = () => {
 
 export default ShowDetails;
 
-const styles = StyleSheet.create({});

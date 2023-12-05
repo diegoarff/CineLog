@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
 
@@ -12,5 +12,3 @@ const CommentDetails = () => {
 };
 
 export default CommentDetails;
-
-const styles = StyleSheet.create({});
