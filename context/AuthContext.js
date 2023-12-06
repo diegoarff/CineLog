@@ -1,6 +1,7 @@
 import { useContext, createContext } from "react";
 // import jwtDecode from "jwt-decode";
 import { useStorageState } from "../hooks/useStorageState";
+import { api, setHeaderToken, removeHeaderToken } from "../api/config";
 
 const AuthContext = createContext(null);
 
@@ -33,36 +34,28 @@ export function AuthProvider({ children }) {
   // }, [token]);
 
   const login = async (data) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        setToken("exampleToken");
-        resolve();
-      }, 2000);
-    });
+    try {
+      const response = await api.post("/auth/signin", data);
+      const { token } = response.data.data;
+      setHeaderToken(token);
+      await setToken(token);
 
-    // try {
-    //   const response = await authApi.post("/login", data);
-    //   const { token, userId } = response.data.data;
-    //   await setSession(token);
-    //   await setUserId(userId);
-    //   api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    //   return response.data.data;
-    // } catch (error) {
-    //   return { error: true, msg: error.response.data.msg };
-    // }
+      return response.data.data;
+    } catch (error) {
+      return { error: true, msg: error.response.data.msg };
+    }
   };
   const register = async (data) => {
-    setToken("exampleToken");
-
-    // try {
-    //   return await authApi.post("/register", data);
-    // } catch (error) {
-    //   return { error: true, msg: error.response.data.msg };
-    // }
+    try {
+      return await api.post("/auth/signup", data);
+    } catch (error) {
+      return { error: true, msg: error.response.data.msg };
+    }
   };
 
   const logout = async () => {
-    setToken(null);
+    removeHeaderToken();
+    await setToken(null);
   };
 
   const value = {

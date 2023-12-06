@@ -24,7 +24,7 @@ const Register = () => {
       }
 
       setLoading(false);
-      router.replace("/");
+      router.replace("/(auth)/login");
     } catch (error) {
       console.log(
         "🚀 ~ file: register.jsx:29 ~ registerHandler ~ error:",
@@ -89,7 +89,7 @@ const Register = () => {
           label="Sign up"
           loading={loading}
           disabled={loading}
-          onPress={handleSubmit(registerHandler)}
+          onPress={handleSubmit(async (data) => await registerHandler(data))}
         />
         <CustomText className="text-zinc-400">
           Already have an account?

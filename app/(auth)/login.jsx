@@ -73,7 +73,7 @@ const Login = () => {
           label="Sign in"
           loading={loading}
           disabled={loading}
-          onPress={handleSubmit(loginHandler)}
+          onPress={handleSubmit(async (data) => await loginHandler(data))}
         />
         <CustomText className="text-zinc-400">
           Dont have an account?
