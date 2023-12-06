@@ -1,7 +1,8 @@
-import { useContext, createContext } from "react";
-// import jwtDecode from "jwt-decode";
+import "core-js/stable/atob"; // Polyfill for atob to make jwt-decode work
+import { useContext, createContext, useEffect } from "react";
 import { useStorageState } from "../hooks/useStorageState";
 import { api, setHeaderToken, removeHeaderToken } from "../api/config";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext(null);
 
@@ -21,17 +22,17 @@ export function AuthProvider({ children }) {
   const [[isLoading, token], setToken] = useStorageState("token");
 
   // Check if the token is expired
-  // useEffect(() => {
-  //   if (token) {
-  //     const { exp } = jwtDecode(token);
-  //     if (Date.now() >= exp * 1000) {
-  //       setToken(null);
-  //     }
-  //   }
+  useEffect(() => {
+    if (token) {
+      const { exp } = jwtDecode(token);
+      if (Date.now() >= exp * 1000) {
+        setToken(null);
+      }
 
-  //   // Set the token in the API header
-  //   // api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  // }, [token]);
+      // Set the token in the API header
+      setHeaderToken(token);
+    }
+  }, [token]);
 
   const login = async (data) => {
     try {

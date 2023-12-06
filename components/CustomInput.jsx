@@ -21,25 +21,22 @@ const CustomInput = ({
   });
 
   return (
-    <View
-      className={`relative mb-12 w-full flex-row items-center gap-3 rounded-lg border px-4 ${
-        error ? "border-red-500" : "border-zinc-400"
-      }`}
-    >
-      {icon && (
-        <Ionicons name={icon} size={24} color={error ? "#ef4444" : "#a1a1aa"} />
-      )}
+    <View className="border-baseLight relative mb-12 w-full flex-row items-center gap-3 rounded-lg border px-4">
+      {icon && <Ionicons name={icon} size={24} color="#a1a1aa" />}
       <TextInput
         value={value}
         onChangeText={onChange}
         onBlur={onBlur}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
-        placeholderTextColor={error ? "#ef4444" : "#52525b"}
-        className="w-full py-3 text-lg text-zinc-400"
+        placeholderTextColor="#71717a"
+        className="text-baseLight w-full py-3 text-lg"
       />
       {error && (
-        <CustomText variant="body2" className="absolute -bottom-8 text-red-500">
+        <CustomText
+          variant="body2"
+          className="text-error-500 absolute -bottom-8"
+        >
           {error.message || "Error"}
         </CustomText>
       )}

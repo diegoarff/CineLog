@@ -17,7 +17,7 @@ const CustomText = ({ variant = "body", className, children }) => {
   };
 
   return (
-    <Text className={`text-gray-100 ${variants[variant]} ${className}`}>
+    <Text className={`${variants[variant]} ${className}`}>
       {children}
     </Text>
   );

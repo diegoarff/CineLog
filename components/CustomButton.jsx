@@ -10,7 +10,7 @@ const CustomButton = ({
   loading,
 }) => {
   const variants = {
-    default: "bg-green-400",
+    default: "bg-teal-500",
     outline: "border border-green-400",
     danger: "bg-red-400",
   };
@@ -19,12 +19,12 @@ const CustomButton = ({
     <View className="w-full">
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <View
-          className={`flex w-full items-center justify-center rounded-full h-14 ${variants[variant]}`}
+          className={`flex h-14 w-full items-center justify-center rounded-full ${variants[variant]}`}
         >
           {loading ? (
-            <ActivityIndicator color="#18181b" size="large"/>
+            <ActivityIndicator color="#f4f4f5" size="large" />
           ) : (
-            <CustomText variant="h5" className="text-zinc-900">
+            <CustomText variant="h5" className="text-zinc-100">
               {label}
             </CustomText>
           )}
