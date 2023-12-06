@@ -33,7 +33,12 @@ export function AuthProvider({ children }) {
   // }, [token]);
 
   const login = async (data) => {
-    setToken("exampleToken");
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setToken("exampleToken");
+        resolve();
+      }, 2000);
+    });
 
     // try {
     //   const response = await authApi.post("/login", data);
@@ -46,7 +51,6 @@ export function AuthProvider({ children }) {
     //   return { error: true, msg: error.response.data.msg };
     // }
   };
-
   const register = async (data) => {
     setToken("exampleToken");
 
