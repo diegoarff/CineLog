@@ -46,6 +46,16 @@ const Register = () => {
       </View>
 
       <CustomInput
+        name="username"
+        icon="person-outline"
+        rules={{
+          required: "Username is required",
+          minLength: { value: 2, message: "Minimum length is 2" },
+        }}
+        placeholder="Username"
+        control={control}
+      />
+      <CustomInput
         name="email"
         icon="mail-outline"
         rules={{
@@ -56,16 +66,6 @@ const Register = () => {
           },
         }}
         placeholder="Email"
-        control={control}
-      />
-      <CustomInput
-        name="username"
-        icon="person-outline"
-        rules={{
-          required: "Username is required",
-          minLength: { value: 2, message: "Minimum length is 2" },
-        }}
-        placeholder="Username"
         control={control}
       />
       <CustomInput

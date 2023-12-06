@@ -41,10 +41,11 @@ const Root = () => {
     return null;
   }
 
+
   return (
-    <AuthProvider>
-      <Slot onLayout={onLayoutRootView} />
-    </AuthProvider>
+      <AuthProvider>
+        <Slot onLayout={onLayoutRootView} />
+      </AuthProvider>
   );
 };
 

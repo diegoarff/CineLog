@@ -1,9 +1,23 @@
 import { Redirect, Stack } from "expo-router";
 import { useAuth } from "../../context/AuthContext";
 import { ActivityIndicator, SafeAreaView } from "react-native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const AppLayout = () => {
   const { isLoading, token } = useAuth();
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        retry: false,
+      },
+      mutations: {
+        retry: false,
+      },
+    },
+  });
 
   if (isLoading) {
     return (
@@ -20,9 +34,11 @@ const AppLayout = () => {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </QueryClientProvider>
   );
 };
 
