@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const FilmGrid = () => {
+const search = () => {
   return (
     <View>
-      <Text>FilmGrid</Text>
+      <Text>search</Text>
     </View>
   )
 }
 
-export default FilmGrid
+export default search

@@ -4,13 +4,6 @@ import CustomText from "./CustomText";
 const Film = ({ item }) => {
   const router = useRouter();
 
-  // type item = {
-  //   media_type: string;
-  //   id: string;
-  //   poster: string;
-  //   name: string;
-  // }
-
   return (
     <Pressable onPress={() => router.push(`/${item.media_type}/${item.id}`)}>
       <View className=" w-36 overflow-hidden ">
@@ -20,7 +13,7 @@ const Film = ({ item }) => {
         />
         <CustomText
           variant="body2"
-          className="text-baseLight py-2"
+          className="py-2 text-baseLight"
           numberOfLines={2}
         >
           {item.name}

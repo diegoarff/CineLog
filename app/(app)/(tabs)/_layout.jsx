@@ -1,5 +1,6 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
+import { Logo, ProfileIcon, SearchBar } from "../../../components";
 const colors = require("tailwindcss/colors");
 
 const TabLayout = () => {
@@ -22,7 +23,17 @@ const TabLayout = () => {
       <Tabs.Screen
         name="home"
         options={{
-          headerShown: false,
+          headerLeft: () => <Logo className="ml-2 aspect-square h-12" />,
+          headerTitle: (props) => <SearchBar {...props} />,
+          headerRight: () => <ProfileIcon className="mr-3" />,
+          headerTitleContainerStyle: {
+            width: "100%",
+          },
+          headerStyle: {
+            backgroundColor: "#101015",
+          },
+          headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
@@ -39,7 +50,17 @@ const TabLayout = () => {
       <Tabs.Screen
         name="discover"
         options={{
-          headerShown: false,
+          headerLeft: () => <Logo className="ml-2 aspect-square h-12" />,
+          headerTitle: (props) => <SearchBar {...props} />,
+          headerRight: () => <ProfileIcon className="mr-3" />,
+          headerTitleContainerStyle: {
+            width: "100%",
+          },
+          headerStyle: {
+            backgroundColor: "#101015",
+          },
+          headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           tabBarLabel: "Discover",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons

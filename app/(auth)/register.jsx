@@ -41,9 +41,9 @@ const Register = () => {
 
   return (
     <AvoidKeyboard>
-      <View className="bg-base flex-1 items-center justify-center px-4">
+      <View className="flex-1 items-center justify-center bg-base px-4">
         <View className="mb-12 w-full items-center gap-4">
-          <Logo />
+          <Logo className="aspect-square h-24" />
           <CustomText variant="h2" className="text-accent">
             Sign up
           </CustomText>

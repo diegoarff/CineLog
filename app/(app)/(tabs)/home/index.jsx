@@ -7,13 +7,13 @@ const Home = () => {
 
   return (
     <ScrollView
-      className="bg-base flex-1 p-4"
+      className="flex-1 bg-base p-4"
       contentContainerStyle={{ gap: 16 }}
     >
       <TrendingSection
         title="Trending"
         linkText="View all trending"
-        linkRoute="/home/trending"
+        linkRoute="/home/all"
         type="all"
         time="day"
       />

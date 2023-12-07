@@ -40,7 +40,7 @@ const Login = () => {
     <AvoidKeyboard>
       <View className=" bg-base flex-1 items-center justify-center px-4">
         <View className="mb-12 w-full items-center gap-4">
-          <Logo />
+          <Logo className="h-24 aspect-square"/>
           <CustomText variant="h2" className="text-accent">
             Sign in
           </CustomText>
