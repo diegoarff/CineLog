@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import AvoidKeyboard from "./AvoidKeyboard";
 import Film from "./Film";
 import FilmRow from "./FilmRow";
-import FilmSection from "./FilmSection";
+import TrendingSection from "./TrendingSection";
 
 export {
   CustomText,
@@ -15,5 +15,5 @@ export {
   AvoidKeyboard,
   Film,
   FilmRow,
-  FilmSection,
+  TrendingSection,
 };
