@@ -1,6 +1,12 @@
 import { Text } from "react-native";
 
-const CustomText = ({ variant = "body", className, children }) => {
+const CustomText = ({
+  variant = "body",
+  className,
+  numberOfLines,
+  onPress,
+  children,
+}) => {
   const variants = {
     h1: "text-5xl font-interBold",
     h2: "text-4xl font-interBold",
@@ -17,7 +23,12 @@ const CustomText = ({ variant = "body", className, children }) => {
   };
 
   return (
-    <Text className={`${variants[variant]} ${className}`}>
+    <Text
+      className={`${variants[variant]} ${className}`}
+      numberOfLines={numberOfLines}
+      onPress={onPress}
+      ellipsizeMode="tail"
+    >
       {children}
     </Text>
   );

@@ -12,8 +12,11 @@ module.exports = {
         accent: colors.teal[500],
         accentLight: colors.teal[300],
         accentDark: colors.teal[700],
-        base: colors.zinc[900],
+        base: '#101015',
+        baseDark: colors.zinc[900],
+        baseMedium: colors.zinc[700],
         baseLight: colors.zinc[400],
+        light: colors.zinc[200],
         error: colors.red,
       },
       fontFamily: {

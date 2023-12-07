@@ -1,10 +1,15 @@
-import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView } from "react-native";
-import { useRouter } from "expo-router";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
 import { useAuth } from "../../../../context/AuthContext";
 import { useTrendingQuery } from "../../../../queries/useTrendingQuery";
+import { FilmSection } from "../../../../components";
 
 const Home = () => {
-  const router = useRouter();
   const { onLogout } = useAuth();
 
   const { data: allDayData, isLoading: isAllDayLoading } = useTrendingQuery(
@@ -31,24 +36,31 @@ const Home = () => {
   }
 
   return (
-    <ScrollView>
-      <Text className="font-interBold text-4xl text-red-500">
-        Trending movies
-      </Text>
-      <Text onPress={() => router.push("/home/movies")}>View all movies</Text>
-      {movieWeekData.map((movie) => (
-        <Text key={movie.id} onPress={() => router.push(`/movies/${movie.id}`)}>
-          {movie.name}
-        </Text>
-      ))}
+    <ScrollView
+      className="bg-base flex-1 p-4"
+      contentContainerStyle={{ gap: 16 }}
+    >
+      <FilmSection
+        title="Trending"
+        rowData={allDayData}
+        linkText="View all trending"
+        linkRoute="/home/trending"
+      />
 
-      <Text className="text-4xl">Trending shows</Text>
-      <Text onPress={() => router.push("/home/shows")}>View all shows</Text>
-      {tvWeekData.map((show) => (
-        <Text key={show.id} onPress={() => router.push(`/shows/${show.id}`)}>
-          {show.name}
-        </Text>
-      ))}
+      <FilmSection
+        title="Popular movies"
+        rowData={movieWeekData}
+        linkText="View all movies"
+        linkRoute="/home/movie"
+      />
+
+      <FilmSection
+        title="Popular shows"
+        rowData={tvWeekData}
+        linkText="View all shows"
+        linkRoute="/home/tv"
+      />
+
       <TouchableOpacity onPress={onLogout}>
         <Text>Example Logout</Text>
       </TouchableOpacity>
