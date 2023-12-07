@@ -6,7 +6,7 @@ const Film = ({ item }) => {
 
   return (
     <Pressable onPress={() => router.push(`/${item.media_type}/${item.id}`)}>
-      <View className=" w-36 overflow-hidden ">
+      <View className="w-[8.725rem] overflow-hidden ">
         <Image
           source={{ uri: item.poster }}
           className=" aspect-[2/3] rounded-lg border-[1px] border-baseMedium"

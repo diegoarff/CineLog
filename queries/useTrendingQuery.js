@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTrending } from "../api/functions";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { getTrending, getTrendingPaginated } from "../api/functions";
 
 export const useTrendingQuery = (type, time) => {
   return useQuery({
@@ -8,3 +8,19 @@ export const useTrendingQuery = (type, time) => {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
+
+export const useTrendingPaginatedQuery = (type, time) => {
+  return useInfiniteQuery({
+    queryKey: ["trending", type, time],
+    queryFn: ({ pageParam = 1 }) => getTrendingPaginated(type, time, pageParam),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    getNextPageParam: (lastPage) => {
+      if (lastPage.page < lastPage.total_pages) {
+        return lastPage.page + 1;
+      }
+      return undefined;
+    },
+  });
+};
+
+

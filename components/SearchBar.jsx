@@ -9,7 +9,7 @@ const SearchBar = () => {
 
   return (
     <Pressable onPress={() => router.push("/(app)/search")}>
-      <View className="flex-row items-center gap-4 rounded-full bg-baseDark px-3 py-2">
+      <View className="w-full flex-row items-center gap-4 rounded-full bg-baseDark px-3 py-2">
         <Ionicons name="search-outline" size={24} color={colors.zinc[400]} />
         <CustomText variant="body2" className="text-baseLight">
           Search anything...

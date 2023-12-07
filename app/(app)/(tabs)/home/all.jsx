@@ -1,12 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { FilmGrid } from "../../../../components";
 
 const all = () => {
-  return (
-    <View>
-      <Text>all</Text>
-    </View>
-  )
-}
+  return <FilmGrid type="all" time="day" />;
+};
 
-export default all
+export default all;

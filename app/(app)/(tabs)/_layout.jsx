@@ -23,17 +23,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="home"
         options={{
-          headerLeft: () => <Logo className="ml-2 aspect-square h-12" />,
-          headerTitle: (props) => <SearchBar {...props} />,
-          headerRight: () => <ProfileIcon className="mr-3" />,
-          headerTitleContainerStyle: {
-            width: "100%",
-          },
-          headerStyle: {
-            backgroundColor: "#101015",
-          },
-          headerTintColor: colors.zinc[200],
-          headerShadowVisible: false,
+          headerShown: false,
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons

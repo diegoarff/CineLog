@@ -1,10 +1,7 @@
-import { Text, TouchableOpacity, ScrollView } from "react-native";
-import { useAuth } from "../../../../context/AuthContext";
+import { ScrollView } from "react-native";
 import { TrendingSection } from "../../../../components";
 
 const Home = () => {
-  const { onLogout } = useAuth();
-
   return (
     <ScrollView
       className="flex-1 bg-base p-4"
@@ -33,10 +30,6 @@ const Home = () => {
         type="tv"
         time="week"
       />
-
-      <TouchableOpacity onPress={onLogout}>
-        <Text>Example Logout</Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 };
