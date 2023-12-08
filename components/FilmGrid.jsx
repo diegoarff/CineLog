@@ -2,7 +2,6 @@ import { ActivityIndicator, FlatList, View } from "react-native";
 import Film from "./Film";
 
 const FilmGrid = ({ data, isLoading, loadMore, isFetchingNextPage }) => {
-  
   return (
     <View className="flex-1 bg-base px-4">
       {isLoading ? (
