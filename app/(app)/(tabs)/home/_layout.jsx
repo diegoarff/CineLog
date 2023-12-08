@@ -9,7 +9,7 @@ const HomeLayout = () => {
         name="index"
         options={{
           headerLeft: () => (
-            <Logo className="-ml-[9px] mr-3 aspect-square w-12" />
+            <Logo className="-ml-[9px] mr-5 aspect-square w-12" />
           ),
           headerTitle: "Home",
           headerRight: () => <ProfileIcon className="-mr-[6px]" />,

@@ -67,7 +67,14 @@ const TabLayout = () => {
       <Tabs.Screen
         name="chat"
         options={{
-          headerShown: false,
+          headerLeft: () => <Logo className="ml-2 aspect-square h-12" />,
+          headerTitle: "Chat",
+          headerRight: () => <ProfileIcon className="mr-3" />,
+          headerStyle: {
+            backgroundColor: "#101015",
+          },
+          headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           tabBarLabel: "Chat",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons

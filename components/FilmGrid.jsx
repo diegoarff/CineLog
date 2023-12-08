@@ -1,19 +1,10 @@
 import { ActivityIndicator, FlatList, View } from "react-native";
 import Film from "./Film";
-import { useTrendingPaginatedQuery } from "../queries/useTrendingQuery";
 
-const FilmGrid = ({ type, time }) => {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useTrendingPaginatedQuery(type, time);
-
-  const loadMore = () => {
-    if (hasNextPage) {
-      fetchNextPage();
-    }
-  };
-
+const FilmGrid = ({ data, isLoading, loadMore, isFetchingNextPage }) => {
+  
   return (
-    <View className="flex-1 bg-base p-4 pb-0">
+    <View className="flex-1 bg-base px-4">
       {isLoading ? (
         <ActivityIndicator size="large" color="#14b8a6" />
       ) : (

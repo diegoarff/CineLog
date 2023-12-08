@@ -3,8 +3,8 @@ import React from "react";
 
 const Discover = () => {
   return (
-    <View>
-      <Text>Discover</Text>
+    <View className="flex-1 bg-base p-4">
+      <Text className="text-white">Discover</Text>
     </View>
   );
 };
