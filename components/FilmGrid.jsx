@@ -14,7 +14,7 @@ const FilmGrid = ({ data, isLoading, loadMore, isFetchingNextPage }) => {
             renderItem={({ item }) => <Film item={item} />}
             contentContainerStyle={{ gap: 4, paddingBottom: 4 }}
             columnWrapperStyle={{ gap: 8 }}
-            keyExtractor={(item) => item.id + item.media_type}
+            keyExtractor={(item) => item.id + item.name}
             onEndReachedThreshold={0}
             onEndReached={loadMore}
           />

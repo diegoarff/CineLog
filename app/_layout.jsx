@@ -1,6 +1,7 @@
 import "../global.css";
 import { Slot } from "expo-router";
 import { AuthProvider } from "../context/AuthContext";
+
 import {
   useFonts,
   Inter_300Light,
@@ -13,6 +14,7 @@ import {
 
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -41,11 +43,12 @@ const Root = () => {
     return null;
   }
 
-
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <AuthProvider>
         <Slot onLayout={onLayoutRootView} />
       </AuthProvider>
+    </GestureHandlerRootView>
   );
 };
 

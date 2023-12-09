@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { View, TextInput, Text, ActivityIndicator } from "react-native";
+import { View, TextInput, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { useDebounce } from "../../hooks/useDebounce";

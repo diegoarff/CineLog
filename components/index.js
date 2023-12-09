@@ -9,6 +9,7 @@ import FilmGrid from "./FilmGrid";
 import TrendingSection from "./TrendingSection";
 import ProfileIcon from "./ProfileIcon";
 import SearchBar from "./SearchBar";
+import CustomBottomSheet from "./CustomBottomSheet";
 
 export {
   CustomText,
@@ -22,4 +23,6 @@ export {
   TrendingSection,
   ProfileIcon,
   SearchBar,
+
+  CustomBottomSheet,
 };

@@ -13,7 +13,7 @@ const CustomText = ({
     h3: "text-3xl font-interBold",
     h4: "text-2xl font-interBold",
     h5: "text-xl font-interBold",
-    h6: "text-lg font-interBold",
+    h6: "text-lg font-interSemiBold",
     body: "text-lg font-interRegular",
     body2: "text-base font-interRegular",
     body3: "text-sm font-interRegular",
