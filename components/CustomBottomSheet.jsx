@@ -15,7 +15,7 @@ const SheetItem = ({ label, onPress }) => {
 };
 
 const CustomBottomSheet = forwardRef(({ options, onSelect }, ref) => {
-  const snapPoints = useMemo(() => ["25%", "50%", "90%"], []);
+  const snapPoints = useMemo(() => ["60%", "90%"], []);
   return (
     <BottomSheet
       ref={ref}
@@ -32,7 +32,7 @@ const CustomBottomSheet = forwardRef(({ options, onSelect }, ref) => {
           <SheetItem
             label={item.label}
             onPress={() => {
-              onSelect(item.value);
+              onSelect(item);
               ref.current.close();
             }}
           />

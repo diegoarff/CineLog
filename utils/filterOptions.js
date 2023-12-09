@@ -24,14 +24,6 @@ export const options = {
       label: "Popularity Ascending",
     },
     {
-      value: "vote_average.desc",
-      label: "Rating Descending",
-    },
-    {
-      value: "vote_average.asc",
-      label: "Rating Ascending",
-    },
-    {
       value: "primary_release_date.desc",
       label: "Release Date Descending",
     },
@@ -40,12 +32,12 @@ export const options = {
       label: "Release Date Ascending",
     },
     {
-      value: "title.asc",
-      label: "Title (A-Z)",
+      value: "revenue.desc",
+      label: "Revenue Descending",
     },
     {
-      value: "title.desc",
-      label: "Title (Z-A)",
+      value: "revenue.asc",
+      label: "Revenue Ascending",
     },
   ],
   genre: {
