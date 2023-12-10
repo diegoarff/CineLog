@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 import FilmRow from "./FilmRow";
 import { useTrendingQuery } from "../queries/useTrendingQuery";
 
-const TrendingSection = ({ title, linkText, linkRoute, type, time }) => {
+const TrendingSection = ({ title, linkText, linkRoute, type, time, chip, big }) => {
   const router = useRouter();
 
   const { data, isLoading } = useTrendingQuery(type, time);
@@ -26,7 +26,7 @@ const TrendingSection = ({ title, linkText, linkRoute, type, time }) => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#14b8a6" />
       ) : (
-        <FilmRow data={data} />
+        <FilmRow data={data} chip={chip} big={big}/>
       )}
     </View>
   );

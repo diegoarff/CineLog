@@ -13,6 +13,8 @@ const Home = () => {
         linkRoute="/home/all"
         type="all"
         time="day"
+        chip
+        big
       />
 
       <TrendingSection

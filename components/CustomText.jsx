@@ -19,6 +19,7 @@ const CustomText = ({
     body3: "text-sm font-interRegular",
     caption: "text-xs font-interRegular",
     overline: "text-xs font-interRegular",
+    chip: "text-xs font-interSemiBold",
     button: "text-base font-interMedium",
   };
 

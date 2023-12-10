@@ -16,6 +16,7 @@ const all = () => {
       isLoading={isLoading}
       loadMore={loadMore}
       isFetchingNextPage={isFetchingNextPage}
+      chip
     />
   );
 };
