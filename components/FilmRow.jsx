@@ -1,13 +1,8 @@
-import { ActivityIndicator, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import Film from "./Film";
-import { useTrendingQuery } from "../queries/useTrendingQuery";
 
-const FilmRow = ({ type, time }) => {
-  const { data, isLoading } = useTrendingQuery(type, time);
-
-  return isLoading ? (
-    <ActivityIndicator size="large" color="#14b8a6" />
-  ) : (
+const FilmRow = ({ data }) => {
+  return (
     <FlatList
       data={data}
       horizontal

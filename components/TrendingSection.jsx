@@ -1,11 +1,14 @@
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import React from "react";
 import CustomText from "./CustomText";
 import { useRouter } from "expo-router";
 import FilmRow from "./FilmRow";
+import { useTrendingQuery } from "../queries/useTrendingQuery";
 
 const TrendingSection = ({ title, linkText, linkRoute, type, time }) => {
   const router = useRouter();
+
+  const { data, isLoading } = useTrendingQuery(type, time);
 
   return (
     <View className="gap-4">
@@ -20,7 +23,11 @@ const TrendingSection = ({ title, linkText, linkRoute, type, time }) => {
           {linkText}
         </CustomText>
       </View>
-      <FilmRow type={type} time={time} />
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#14b8a6" />
+      ) : (
+        <FilmRow data={data} />
+      )}
     </View>
   );
 };
