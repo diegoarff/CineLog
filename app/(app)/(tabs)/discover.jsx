@@ -1,19 +1,24 @@
 import { View, Pressable, ActivityIndicator } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useRef, useState } from "react";
+import MaterialIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useCallback, useRef, useState } from "react";
 import { CustomText, CustomBottomSheet, FilmGrid } from "../../../components";
 import { options } from "../../../utils/filterOptions";
 import { useDiscoverQuery } from "../../../queries/useSearchQuery";
 import colors from "tailwindcss/colors";
 
-const SheetButton = ({ title, onPress }) => {
+const SheetButton = ({ selected, onPress }) => {
   return (
     <Pressable
       className="flex-1 flex-row items-center justify-between gap-2 rounded-xl border border-accentDark px-4 py-2"
       onPress={onPress}
     >
-      <CustomText variant="h6" className="text-baseLight flex-1" numberOfLines={1}>
-        {title}
+      <CustomText
+        variant="body2"
+        className="flex-1 text-baseLight"
+        numberOfLines={1}
+      >
+        {selected}
       </CustomText>
       <Ionicons name="chevron-down" size={20} color={colors.zinc[400]} />
     </Pressable>
@@ -21,22 +26,13 @@ const SheetButton = ({ title, onPress }) => {
 };
 
 const Discover = () => {
-  const [selectedType, setSelectedType] = useState({
-    label: "Movie",
-    value: "movie",
-  });
-  const [selectedSort, setSelectedSort] = useState({
-    label: "Sort",
-    value: "popularity.desc",
-  });
-  const [selectedYear, setSelectedYear] = useState({
-    label: "Year",
-    value: "",
-  });
-  const [selectedGenre, setSelectedGenre] = useState({
-    label: "Genre",
-    value: "",
-  });
+  const [selectedType, setSelectedType] = useState(options.type[0]);
+  const [selectedSort, setSelectedSort] = useState(options.sort[0]);
+  const [selectedYear, setSelectedYear] = useState(options.year[0]);
+  const [selectedLanguage, setSelectedLanguage] = useState(options.language[0]);
+  const [selectedGenre, setSelectedGenre] = useState(
+    options.genre[selectedType.value][0],
+  );
 
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [valueToChange, setValueToChange] = useState("");
@@ -50,7 +46,7 @@ const Discover = () => {
         : options[option];
     setSelectedOptions(selectedOption);
     setValueToChange(option);
-    sheetRef.current.snapToIndex(0);
+    sheetRef.current.expand();
   };
 
   const handleSelect = (value) => {
@@ -63,6 +59,9 @@ const Discover = () => {
         break;
       case "year":
         setSelectedYear(value);
+        break;
+      case "language":
+        setSelectedLanguage(value);
         break;
       case "genre":
         setSelectedGenre(value);
@@ -77,27 +76,46 @@ const Discover = () => {
       selectedType.value,
       selectedSort.value,
       selectedYear.value,
+      selectedLanguage.value,
       selectedGenre.value,
     );
 
-  const loadMore = () => {
+  const loadMore = useCallback(() => {
     if (hasNextPage) {
       fetchNextPage();
     }
-  };
+  }, []);
+
+  const resetFilters = useCallback(() => {
+    setSelectedType(options.type[0]);
+    setSelectedSort(options.sort[0]);
+    setSelectedYear(options.year[0]);
+    setSelectedLanguage(options.language[0]);
+    setSelectedGenre(options.genre[selectedType.value][0]);
+  }, []);
 
   return (
     <View className="flex-1 bg-base">
       <View className="p-4">
-        <View className="mb-4 flex-row gap-4">
+        <View className="mb-4 flex-row items-center gap-4">
+          <Pressable
+            className="rounded-xl border border-red-500 p-2"
+            onPress={resetFilters}
+          >
+            <MaterialIcons
+              name="filter-off"
+              size={20}
+              color={colors.red[500]}
+            />
+          </Pressable>
           <SheetButton
-            title={selectedType.label}
+            selected={selectedType.label}
             onPress={() => {
               handleModalOpen("type");
             }}
           />
           <SheetButton
-            title={selectedSort.label}
+            selected={selectedSort.label}
             onPress={() => {
               handleModalOpen("sort");
             }}
@@ -105,13 +123,19 @@ const Discover = () => {
         </View>
         <View className="flex-row gap-4">
           <SheetButton
-            title={selectedYear.label}
+            selected={selectedYear.label}
             onPress={() => {
               handleModalOpen("year");
             }}
           />
           <SheetButton
-            title={selectedGenre.label}
+            selected={selectedLanguage.label}
+            onPress={() => {
+              handleModalOpen("language");
+            }}
+          />
+          <SheetButton
+            selected={selectedGenre.label}
             onPress={() => {
               handleModalOpen("genre");
             }}
@@ -136,6 +160,7 @@ const Discover = () => {
 
       <CustomBottomSheet
         ref={sheetRef}
+        title={valueToChange}
         options={selectedOptions}
         onSelect={(value) => {
           handleSelect(value);

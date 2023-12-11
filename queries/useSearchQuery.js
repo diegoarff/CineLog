@@ -19,11 +19,11 @@ export const useSearchQuery = (query) => {
   });
 };
 
-export const useDiscoverQuery = (type, sort, year, genre) => {
+export const useDiscoverQuery = (type, sort, year, language, genre) => {
   return useInfiniteQuery({
-    queryKey: ["discover", type, sort, year, genre],
+    queryKey: ["discover", type, sort, year, language, genre],
     queryFn: ({ pageParam = 1 }) => {
-      return getDiscover(type, sort, year, genre, pageParam);
+      return getDiscover(type, sort, year, language, genre, pageParam);
     },
     staleTime: 1000 * 60 * 5, // 5 minutes
     getNextPageParam: (lastPage) => {

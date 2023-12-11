@@ -15,9 +15,22 @@ export const getSearch = async (query, pageParam) => {
   return response.data.data;
 };
 
-export const getDiscover = async (media_type, sort, year, genre, pageParam) => {
+export const getDiscover = async (
+  media_type,
+  sort,
+  year,
+  language,
+  genre,
+  pageParam,
+) => {
   const response = await api.get(
-    `/search/filter/${media_type}?sort_by=${sort}&year=${year}&with_genres=${genre}&page=${pageParam}`,
+    `/search/filter/${media_type}?sort_by=${sort}&primary_release_year=${year}&first_air_date_year=${year}&with_original_language=${language}&with_genres=${genre}&page=${pageParam}`,
   );
+  return response.data.data;
+};
+
+export const getMedia = async (mediaType, id) => {
+  const response = await api.get(`/media/${mediaType}/${id}`);
+
   return response.data.data;
 };

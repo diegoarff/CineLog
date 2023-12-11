@@ -40,6 +40,56 @@ export const options = {
       label: "Revenue Ascending",
     },
   ],
+  language: [
+    {
+      value: "en",
+      label: "English",
+    },
+    {
+      value: "es",
+      label: "Spanish",
+    },
+    {
+      value: "ja",
+      label: "Japanese",
+    },
+    {
+      value: "ko",
+      label: "Korean",
+    },
+    {
+      value: "zh",
+      label: "Mandarin Chinese",
+    },
+    {
+      value: "fr",
+      label: "French",
+    },
+    {
+      value: "hi",
+      label: "Hindi",
+    },
+    {
+      value: "pt",
+      label: "Portuguese",
+    },
+    {
+      value: "ru",
+      label: "Russian",
+    },
+    {
+      value: "de",
+      label: "German",
+    },
+    {
+      value: "it",
+      label: "Italian",
+    },
+    {
+      value: "ar",
+      label: "Arabic",
+    },
+  ],
   genre: {
     movie: [
       {
