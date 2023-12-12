@@ -10,6 +10,7 @@ import TrendingSection from "./TrendingSection";
 import ProfileIcon from "./ProfileIcon";
 import SearchBar from "./SearchBar";
 import CustomBottomSheet from "./CustomBottomSheet";
+import CastList from "./CastList";
 
 export {
   CustomText,
@@ -23,6 +24,6 @@ export {
   TrendingSection,
   ProfileIcon,
   SearchBar,
-
+  CastList,
   CustomBottomSheet,
 };

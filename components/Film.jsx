@@ -34,7 +34,7 @@ const Film = ({ item, chip, big }) => {
           className="py-2 text-baseLight"
           numberOfLines={2}
         >
-          {item.name}
+          {item.title}
         </CustomText>
         {chip && <MediaTypeChip mediaType={item.media_type} />}
       </View>

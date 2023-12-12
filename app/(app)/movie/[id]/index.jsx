@@ -1,5 +1,5 @@
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { View, Text, ActivityIndicator, Image } from "react-native";
+import { View, ActivityIndicator, Image } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useDetailsQuery } from "../../../../queries/useDetailsQuery";
 import YoutubePlayer from "react-native-youtube-iframe";
@@ -10,7 +10,7 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from "react-native-reanimated";
-import { CustomText, FilmRow } from "../../../../components";
+import { CastList, CustomText, FilmRow } from "../../../../components";
 import { useState } from "react";
 
 const MovieDetails = () => {
@@ -81,7 +81,11 @@ const MovieDetails = () => {
           <>
             <View className="relative">
               <Image
-                source={{ uri: data.backdrop }}
+                source={{
+                  uri: !data.backdrop.split("/")[6]
+                    ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
+                    : data.backdrop,
+                }}
                 className="aspect-video w-full "
               />
               <Image
@@ -94,7 +98,11 @@ const MovieDetails = () => {
               {/* POSTER AND HEADER INFO */}
               <View className={`${showTrailer ? "mb-6" : ""} flex-row gap-8`}>
                 <Image
-                  source={{ uri: data.poster }}
+                  source={{
+                    uri: !data.poster.split("/")[6]
+                      ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
+                      : data.poster,
+                  }}
                   className="aspect-[2/3] w-36 rounded-lg border-[1px] border-baseMedium"
                 />
                 <View className="flex-1 justify-center gap-4">
@@ -170,7 +178,14 @@ const MovieDetails = () => {
                   </View>
                 </View>
 
-                <Text>{JSON.stringify(data.cast)}</Text>
+                {/* CAST */}
+                <View className="gap-4">
+                  <CustomText variant="button" className="text-baseMedium">
+                    CAST
+                  </CustomText>
+
+                  <CastList data={data.cast} />
+                </View>
 
                 {/* SIMILAR */}
                 <View className="gap-4">
