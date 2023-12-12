@@ -6,7 +6,7 @@ const all = () => {
     useTrendingPaginatedQuery("all", "day");
 
   const loadMore = () => {
-    if (hasNextPage) {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   };

@@ -20,7 +20,7 @@ const CustomText = ({
     caption: "text-sm font-interSemiBold",
     overline: "text-xs font-interRegular",
     chip: "text-xs font-interSemiBold",
-    button: "text-base font-interMedium",
+    button: "text-base font-interSemiBold",
   };
 
   return (

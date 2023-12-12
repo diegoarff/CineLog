@@ -5,6 +5,9 @@
     "scheme": "cinelog",
     "version": "1.0.0",
     "userInterfaceStyle": "automatic",
+    "androidStatusBar": {
+      "barStyle": "light-content"
+    },
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",

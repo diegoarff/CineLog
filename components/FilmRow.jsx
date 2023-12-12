@@ -8,7 +8,7 @@ const FilmRow = ({ data, chip, big }) => {
       horizontal
       contentContainerStyle={{ gap: 12 }}
       renderItem={({ item }) => <Film item={item} chip={chip} big={big} />}
-      keyExtractor={(item) => item.id + item.media_type}
+      keyExtractor={(item) => item.id + (item.media_type || item.title)}
     />
   );
 };

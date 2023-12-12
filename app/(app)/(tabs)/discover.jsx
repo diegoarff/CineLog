@@ -31,7 +31,7 @@ const Discover = () => {
   const [selectedYear, setSelectedYear] = useState(options.year[0]);
   const [selectedLanguage, setSelectedLanguage] = useState(options.language[0]);
   const [selectedGenre, setSelectedGenre] = useState(
-    options.genre[selectedType.value][0],
+    options.genre[selectedType.value][2],
   );
 
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -80,18 +80,18 @@ const Discover = () => {
       selectedGenre.value,
     );
 
-  const loadMore = useCallback(() => {
-    if (hasNextPage) {
+  const loadMore = () => {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, []);
+  };
 
   const resetFilters = useCallback(() => {
     setSelectedType(options.type[0]);
     setSelectedSort(options.sort[0]);
     setSelectedYear(options.year[0]);
     setSelectedLanguage(options.language[0]);
-    setSelectedGenre(options.genre[selectedType.value][0]);
+    setSelectedGenre(options.genre[selectedType.value][2]);
   }, []);
 
   return (

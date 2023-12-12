@@ -18,10 +18,16 @@ const Film = ({ item, chip, big }) => {
 
   return (
     <Pressable onPress={() => router.push(`/${item.media_type}/${item.id}`)}>
-      <View className={`relative ${big ? "w-56" : "w-[8.725rem]"} overflow-hidden`}>
+      <View
+        className={`relative ${big ? "w-56" : "w-[8.725rem]"} overflow-hidden`}
+      >
         <Image
-          source={{ uri: item.poster }}
-          className="aspect-[2/3] rounded-lg border-[1px] border-baseMedium"
+          source={{
+            uri: !item.poster.split("/")[6]
+              ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
+              : item.poster,
+          }}
+          className="aspect-[2/3] rounded-lg border border-baseMedium"
         />
         <CustomText
           variant="body2"

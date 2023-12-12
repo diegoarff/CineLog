@@ -6,7 +6,7 @@ const tv = () => {
     useTrendingPaginatedQuery("tv", "week");
 
   const loadMore = () => {
-    if (hasNextPage) {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   };
