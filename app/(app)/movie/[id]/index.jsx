@@ -1,5 +1,5 @@
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { View, ActivityIndicator, Image } from "react-native";
+import { View, ActivityIndicator, Image, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useDetailsQuery } from "../../../../queries/useDetailsQuery";
 import YoutubePlayer from "react-native-youtube-iframe";
@@ -10,12 +10,19 @@ import Animated, {
   useAnimatedStyle,
   useScrollViewOffset,
 } from "react-native-reanimated";
-import { CastList, CustomText, FilmRow } from "../../../../components";
-import { useState } from "react";
+import {
+  CastList,
+  CreateReviewBottomSheet,
+  CustomText,
+  FilmRow,
+} from "../../../../components";
+import { useRef, useState } from "react";
 
 const MovieDetails = () => {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+
+  const reviewSheetRef = useRef(null);
 
   const [showTrailer, setShowTrailer] = useState(false);
 
@@ -52,17 +59,8 @@ const MovieDetails = () => {
               numberOfLines={1}
               style={[headerAnimatedStyle]}
             >
-              {data?.title || ""}
+              {data?.media.title || ""}
             </Animated.Text>
-          ),
-          headerRight: () => (
-            <Ionicons
-              name="share-social"
-              size={25}
-              color={colors.zinc[200]}
-              onPress={() => router.back()}
-              className="rounded-full bg-base p-2"
-            />
           ),
           headerBackground: () => (
             <Animated.View
@@ -82,9 +80,9 @@ const MovieDetails = () => {
             <View className="relative">
               <Image
                 source={{
-                  uri: !data.backdrop.split("/")[6]
+                  uri: !data.media.backdrop.split("/")[6]
                     ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
-                    : data.backdrop,
+                    : data.media.backdrop,
                 }}
                 className="aspect-video w-full "
               />
@@ -94,25 +92,25 @@ const MovieDetails = () => {
               />
             </View>
 
-            <View className="-mt-12 flex-1 px-4">
+            <View className="-mt-12 flex-1 px-4 pb-8">
               {/* POSTER AND HEADER INFO */}
               <View className={`${showTrailer ? "mb-6" : ""} flex-row gap-8`}>
                 <Image
                   source={{
-                    uri: !data.poster.split("/")[6]
+                    uri: !data.media.poster.split("/")[6]
                       ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
-                      : data.poster,
+                      : data.media.poster,
                   }}
                   className="aspect-[2/3] w-36 rounded-lg border-[1px] border-baseMedium"
                 />
                 <View className="flex-1 justify-center gap-4">
                   <View>
                     <CustomText variant="h4" className="text-light">
-                      {data.title}
+                      {data.media.title}
                     </CustomText>
-                    {data.original_language !== "en" && (
+                    {data.media.original_language !== "en" && (
                       <CustomText className="italic text-baseLight">
-                        {data.original_title}
+                        {data.media.original_title}
                       </CustomText>
                     )}
                   </View>
@@ -121,7 +119,7 @@ const MovieDetails = () => {
                       variant="button"
                       className=" self-start rounded-full bg-baseDark px-4 py-2 text-baseLight"
                     >
-                      {data.year}
+                      {data.media.year}
                     </CustomText>
                     <CustomText
                       variant="button"
@@ -138,7 +136,7 @@ const MovieDetails = () => {
               {showTrailer && (
                 <View className="aspect-[16/9] overflow-hidden rounded-xl">
                   <YoutubePlayer
-                    videoId={data.trailer.split("=")[1]}
+                    videoId={data.media.trailer.split("=")[1]}
                     height="100%"
                     webViewStyle={{ opacity: 0.99 }}
                     resumePlayAndroid={false}
@@ -156,7 +154,7 @@ const MovieDetails = () => {
                     OVERVIEW
                   </CustomText>
                   <CustomText className=" text-baseLight">
-                    {data.overview}
+                    {data.media.overview}
                   </CustomText>
                 </View>
 
@@ -166,7 +164,7 @@ const MovieDetails = () => {
                     GENRES
                   </CustomText>
                   <View className="flex-row flex-wrap gap-4">
-                    {data.genres.map((genre) => (
+                    {data.media.genres.map((genre) => (
                       <CustomText
                         key={genre.id}
                         variant="button"
@@ -184,7 +182,7 @@ const MovieDetails = () => {
                     CAST
                   </CustomText>
 
-                  <CastList data={data.cast} />
+                  <CastList data={data.media.cast} />
                 </View>
 
                 {/* SIMILAR */}
@@ -192,8 +190,8 @@ const MovieDetails = () => {
                   <CustomText variant="button" className="text-baseMedium">
                     SIMILAR TO THIS
                   </CustomText>
-                  {data.similar.length > 0 ? (
-                    <FilmRow data={data.similar} />
+                  {data.media.similar.length > 0 ? (
+                    <FilmRow data={data.media.similar} />
                   ) : (
                     <CustomText className="text-baseLight">
                       No similar media found
@@ -201,10 +199,32 @@ const MovieDetails = () => {
                   )}
                 </View>
               </View>
+              <View className="mt-4 flex-row justify-between gap-4">
+                <Pressable
+                  onPress={() =>
+                    router.push(`/movie/${data.media._id}/reviews`)
+                  }
+                  className="flex-1 items-center justify-center rounded-full border border-accentDark  py-4"
+                >
+                  <CustomText variant="h5" className="text-light">
+                    See reviews
+                  </CustomText>
+                </Pressable>
+                <Pressable
+                  onPress={() => reviewSheetRef.current.expand()}
+                  className="flex-row items-center justify-center gap-2 rounded-full bg-accentDark px-6 py-4"
+                >
+                  <Ionicons name="star" size={25} color="white" />
+                  <CustomText variant="h5" className="text-light">
+                    Add
+                  </CustomText>
+                </Pressable>
+              </View>
             </View>
           </>
         )}
       </Animated.ScrollView>
+      <CreateReviewBottomSheet ref={reviewSheetRef} />
     </>
   );
 };

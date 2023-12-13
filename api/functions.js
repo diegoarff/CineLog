@@ -34,3 +34,17 @@ export const getMedia = async (mediaType, id) => {
 
   return response.data.data;
 };
+
+export const getMediaReviews = async (id) => {
+  const response = await api.get(`/review/${id}`);
+  return response.data.data;
+};
+
+export const createReview = async (id, score, content) => {
+  const response = await api.post(`/review/create`, {
+    MediaID: id,
+    score,
+    content,
+  });
+  return response.data.data;
+};

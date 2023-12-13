@@ -21,7 +21,7 @@ const CustomInput = ({
   });
 
   return (
-    <View className="border-baseLight relative mb-12 w-full flex-row items-center gap-3 rounded-lg border px-4">
+    <View className="relative mb-12 w-full flex-row items-center gap-3 rounded-lg border border-baseLight px-4">
       {icon && <Ionicons name={icon} size={24} color="#a1a1aa" />}
       <TextInput
         value={value}
@@ -30,12 +30,12 @@ const CustomInput = ({
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         placeholderTextColor="#71717a"
-        className="text-baseLight w-full py-3 text-lg"
+        className="w-full py-3 text-lg text-baseLight"
       />
       {error && (
         <CustomText
           variant="body2"
-          className="text-error-500 absolute -bottom-8"
+          className="absolute -bottom-8 text-error-500"
         >
           {error.message || "Error"}
         </CustomText>

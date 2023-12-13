@@ -24,7 +24,7 @@ const CustomButton = ({
           {loading ? (
             <ActivityIndicator color="#f4f4f5" size="large" />
           ) : (
-            <CustomText variant="h5" className="text-zinc-100">
+            <CustomText variant="h5" className="text-light">
               {label}
             </CustomText>
           )}
