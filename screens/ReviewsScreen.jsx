@@ -8,21 +8,22 @@ import {
 import { useRouter } from "expo-router";
 import { useMediaReviewsQuery } from "../queries/useMediaReviewsQuery";
 import colors from "tailwindcss/colors";
-import { CustomText } from "../components";
+import { CreateReviewBottomSheet, CustomText } from "../components";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRef } from "react";
 
 const Review = ({ item }) => {
   return (
     <View className="gap-6 rounded-xl bg-baseDark p-4">
       <View className="flex-row items-center gap-3">
         <Image
-          source={{ uri: item.user.avatar }}
+          source={{ uri: item.userId.avatar }}
           className="aspect-square w-10 rounded-full"
         />
         <CustomText variant="h5" className="text-light" numberOfLines={1}>
-          {item.user.username}
+          {item.userId.username}
         </CustomText>
-        {item.user.critic && (
+        {item.userId.critic && (
           <CustomText
             variant="chip"
             className="rounded-full bg-accentDark px-2 py-1 text-light"
@@ -59,8 +60,9 @@ const Review = ({ item }) => {
   );
 };
 
-const ReviewsScreen = ({ id }) => {
+const ReviewsScreen = ({ id, haveEdited }) => {
   const router = useRouter();
+  const reviewSheetRef = useRef(null);
 
   const { data, isLoading } = useMediaReviewsQuery(id);
 
@@ -73,9 +75,9 @@ const ReviewsScreen = ({ id }) => {
   }
 
   return (
-    <View className="flex-1 bg-base p-4">
+    <View className="relative flex-1 bg-base p-4">
       <FlatList
-        data={data}
+        data={data.reviews}
         contentContainerStyle={{ gap: 16 }}
         renderItem={({ item }) => {
           return (
@@ -84,8 +86,20 @@ const ReviewsScreen = ({ id }) => {
             </Pressable>
           );
         }}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id + item.score}
       />
+      {!data.userHasReviewed && (
+        <Pressable
+          onPress={() => reviewSheetRef.current.expand()}
+          className="absolute bottom-4 right-4 flex-row items-center justify-center gap-2 rounded-full bg-accentDark px-5 py-3"
+        >
+          <Ionicons name="star" size={25} color={colors.zinc[200]} />
+          <CustomText variant="h5" className="text-light">
+            Write
+          </CustomText>
+        </Pressable>
+      )}
+      <CreateReviewBottomSheet id={id} ref={reviewSheetRef} />
     </View>
   );
 };

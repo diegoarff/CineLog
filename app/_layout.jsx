@@ -15,6 +15,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -43,12 +44,16 @@ const Root = () => {
     return null;
   }
 
+  const queryClient = new QueryClient();
+
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>
-        <Slot onLayout={onLayoutRootView} />
-      </AuthProvider>
-    </GestureHandlerRootView>
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <AuthProvider>
+          <Slot onLayout={onLayoutRootView} />
+        </AuthProvider>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
   );
 };
 

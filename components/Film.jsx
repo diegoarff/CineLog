@@ -23,9 +23,10 @@ const Film = ({ item, chip, big }) => {
       >
         <Image
           source={{
-            uri: !item.poster.split("/")[6]
-              ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
-              : item.poster,
+            uri:
+              item.poster.split("w780")[1] === "null"
+                ? "https://firebasestorage.googleapis.com/v0/b/imgstorage-b6657.appspot.com/o/imgNotFound.png?alt=media&token=3eec4488-078e-4130-a238-36936cb38807"
+                : item.poster,
           }}
           className="aspect-[2/3] rounded-lg border border-baseMedium"
         />
