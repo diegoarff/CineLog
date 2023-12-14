@@ -3,6 +3,7 @@ import { useContext, createContext, useEffect } from "react";
 import { useStorageState } from "../hooks/useStorageState";
 import { api, setHeaderToken, removeHeaderToken } from "../api/config";
 import { jwtDecode } from "jwt-decode";
+import { ToastAndroid } from "react-native";
 
 const AuthContext = createContext(null);
 
@@ -43,14 +44,16 @@ export function AuthProvider({ children }) {
 
       return response.data.data;
     } catch (error) {
-      return { error: true, msg: error.response.data.msg };
+      ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);
+      return { error: true, message: error.response.data.message };
     }
   };
   const register = async (data) => {
     try {
       return await api.post("/auth/signup", data);
     } catch (error) {
-      return { error: true, msg: error.response.data.msg };
+      ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);
+      return { error: true, message: error.response.data.message };
     }
   };
 

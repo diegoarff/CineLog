@@ -1,7 +1,6 @@
 import "../global.css";
 import { Slot } from "expo-router";
 import { AuthProvider } from "../context/AuthContext";
-
 import {
   useFonts,
   Inter_300Light,

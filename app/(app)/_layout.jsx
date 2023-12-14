@@ -1,6 +1,6 @@
 import { Redirect, Stack } from "expo-router";
 import { useAuth } from "../../context/AuthContext";
-import { ActivityIndicator, SafeAreaView } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import colors from "tailwindcss/colors";
 
 const AppLayout = () => {
@@ -8,16 +8,9 @@ const AppLayout = () => {
 
   if (isLoading) {
     return (
-      <SafeAreaView
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#101015",
-        }}
-      >
+      <View className="flex-1 items-center justify-center bg-base">
         <ActivityIndicator size="large" color={colors.teal[500]} />
-      </SafeAreaView>
+      </View>
     );
   }
 
@@ -30,6 +23,14 @@ const AppLayout = () => {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="search" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="profile"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerTitle: "Profile",
+        }}
+      />
       <Stack.Screen
         name="movie/[id]/reviews"
         options={{

@@ -25,7 +25,6 @@ const Register = () => {
 
       if (result.error) {
         setLoading(false);
-        alert(result.msg);
         return;
       }
 

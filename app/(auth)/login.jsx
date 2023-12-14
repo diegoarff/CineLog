@@ -25,12 +25,11 @@ const Login = () => {
 
       if (result.error) {
         setLoading(false);
-        alert(result.msg);
         return;
       }
 
       setLoading(false);
-      router.replace("/");
+      router.replace("/(app)/(tabs)/home");
     } catch (error) {
       console.log("🚀 ~ file: login.jsx:29 ~ loginHandler ~ error:", error);
     }

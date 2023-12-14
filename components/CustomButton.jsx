@@ -11,8 +11,8 @@ const CustomButton = ({
 }) => {
   const variants = {
     default: "bg-teal-500",
-    outline: "border border-green-400",
-    danger: "bg-red-400",
+    outline: "border border-teal-500",
+    danger: "bg-red-500",
   };
 
   return (
