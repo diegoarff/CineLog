@@ -116,12 +116,20 @@ const DetailsScreen = ({ mediaType, id }) => {
                     )}
                   </View>
 
-                  <CustomText
-                    variant="button"
-                    className=" self-start rounded-full bg-baseDark px-4 py-2 text-baseLight"
-                  >
-                    {data.year}
-                  </CustomText>
+                  <View className="flex-row gap-4">
+                    <CustomText
+                      variant="button"
+                      className=" self-start rounded-full bg-baseDark px-4 py-2 text-baseLight"
+                    >
+                      {data.year}
+                    </CustomText>
+                    <CustomText
+                      variant="button"
+                      className=" self-start rounded-full bg-baseDark px-4 py-2 text-baseLight "
+                    >
+                      {data.mediaType === "tv" ? "TV Show" : "Movie"}
+                    </CustomText>
+                  </View>
                 </View>
               </View>
 
@@ -154,6 +162,45 @@ const DetailsScreen = ({ mediaType, id }) => {
                     ))}
                   </View>
                 </View>
+
+                {/* SEASONS */}
+                {data.seasons && data.seasons.length > 0 && (
+                  <View className="gap-2">
+                    <CustomText variant="button" className="text-baseMedium">
+                      SEASONS
+                    </CustomText>
+                    <View className="gap-4">
+                      {data.seasons.map((season) => (
+                        <View
+                          key={season.id}
+                          className="flex-row gap-4 rounded-lg bg-baseDark pr-4"
+                        >
+                          <Image
+                            source={{
+                              uri: `https://image.tmdb.org/t/p/w780${season.poster_path}`,
+                            }}
+                            className="aspect-[2/3] w-16 rounded-lg border border-baseMedium"
+                          />
+                          <View className="flex-1 justify-center">
+                            <CustomText
+                              variant="h6"
+                              className="text-baseLight"
+                              numberOfLines={1}
+                            >
+                              {season.name}
+                            </CustomText>
+                            <CustomText
+                              variant="body2"
+                              className="text-baseLight"
+                            >
+                              {season.episode_count} episodes
+                            </CustomText>
+                          </View>
+                        </View>
+                      ))}
+                    </View>
+                  </View>
+                )}
 
                 {/* VIDEOS */}
                 <View className="gap-2">
