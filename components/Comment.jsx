@@ -5,24 +5,24 @@ import CustomText from "./CustomText";
 const Comment = ({ item, detail }) => {
   return (
     <View className={`gap-6 ${detail ? "" : "rounded-xl"} bg-baseDark p-4`}>
-      <View className="flex-row items-center gap-3">
-        <Image
-          source={{ uri: item.userId.avatar }}
-          className="aspect-square w-10 rounded-full"
-        />
-        <CustomText variant="h5" className="text-light" numberOfLines={1}>
-          {item.userId.username}
-        </CustomText>
-        {item.userId.critic && (
-          <CustomText
-            variant="chip"
-            className="rounded-full bg-accentDark px-2 py-1 text-light"
-          >
-            CRITIC
+      <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center gap-3">
+          <Image
+            source={{ uri: item.userId.avatar }}
+            className="aspect-square w-10 rounded-full"
+          />
+          <CustomText variant="h5" className="text-light" numberOfLines={1}>
+            {item.userId.username}
           </CustomText>
-        )}
-      </View>
-      <View className="gap-2">
+          {item.userId.critic && (
+            <CustomText
+              variant="chip"
+              className="rounded-full bg-accentDark px-2 py-1 text-light"
+            >
+              CRITIC
+            </CustomText>
+          )}
+        </View>
         <View>
           <CustomText variant="body2" className="text-baseLight">
             {new Date(item.updatedAt).toLocaleDateString(undefined, {
@@ -32,7 +32,8 @@ const Comment = ({ item, detail }) => {
             })}
           </CustomText>
         </View>
-
+      </View>
+      <View>
         {item.content && (
           <CustomText className="text-baseLight">{item.content}</CustomText>
         )}
