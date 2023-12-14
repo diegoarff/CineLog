@@ -56,6 +56,7 @@ const search = () => {
           data={data}
           loadMore={loadMore}
           isFetchingNextPage={isFetchingNextPage}
+          chip
         />
       )}
     </View>

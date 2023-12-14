@@ -38,6 +38,14 @@ const AppLayout = () => {
           headerTitle: "Reviews",
         }}
       />
+      <Stack.Screen
+        name="tv/[id]/reviews"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerTitle: "Reviews",
+        }}
+      />
     </Stack>
   );
 };

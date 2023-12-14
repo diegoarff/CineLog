@@ -7,9 +7,9 @@ import { Rating } from "@kolking/react-native-rating";
 import { useCreateReviewMutation } from "../queries/useMediaReviewsQuery";
 import { useQueryClient } from "@tanstack/react-query";
 
-const CreateReviewBottomSheet = forwardRef(({ id }, ref) => {
+const CreateReviewBottomSheet = forwardRef(({ id, mediaType }, ref) => {
   const snapPoints = useMemo(() => ["100%"], []);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(1);
   const [content, setContent] = useState("");
 
   const queryClient = useQueryClient();
@@ -28,13 +28,15 @@ const CreateReviewBottomSheet = forwardRef(({ id }, ref) => {
       { id, score, content },
       {
         onSuccess: (data) => {
+          ref.current.close();
           queryClient.setQueryData(["reviews", id], (oldData) => {
             return {
               reviews: [data, ...oldData.reviews],
               userHasReviewed: true,
             };
           });
-          ref.current.close();
+          queryClient.invalidateQueries({ queryKey: ["reviews", id] });
+          queryClient.invalidateQueries({ queryKey: [mediaType] });
         },
         onError: () => {
           ref.current.close();

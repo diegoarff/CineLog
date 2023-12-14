@@ -4,8 +4,7 @@ import DetailsScreen from "../../../../screens/DetailsScreen";
 const ShowDetails = () => {
   const { id } = useLocalSearchParams();
 
-  return <DetailsScreen type="shows" id={id} />;
+  return <DetailsScreen mediaType="tv" id={id} />;
 };
 
 export default ShowDetails;
-

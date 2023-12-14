@@ -44,7 +44,18 @@ const Root = () => {
     return null;
   }
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    // Put the best options for perfomance
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        retry: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>

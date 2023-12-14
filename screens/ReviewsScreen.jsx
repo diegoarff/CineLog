@@ -5,7 +5,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useSegments } from "expo-router";
 import { useMediaReviewsQuery } from "../queries/useMediaReviewsQuery";
 import colors from "tailwindcss/colors";
 import { CreateReviewBottomSheet, CustomText } from "../components";
@@ -54,15 +54,19 @@ const Review = ({ item }) => {
             </CustomText>
           </View>
         </View>
-        <CustomText className="text-baseLight">{item.content}</CustomText>
+        {item.content && (
+          <CustomText className="text-baseLight">{item.content}</CustomText>
+        )}
       </View>
     </View>
   );
 };
 
-const ReviewsScreen = ({ id, haveEdited }) => {
+const ReviewsScreen = ({ id }) => {
   const router = useRouter();
   const reviewSheetRef = useRef(null);
+
+  const segments = useSegments();
 
   const { data, isLoading } = useMediaReviewsQuery(id);
 
@@ -76,18 +80,26 @@ const ReviewsScreen = ({ id, haveEdited }) => {
 
   return (
     <View className="relative flex-1 bg-base p-4">
-      <FlatList
-        data={data.reviews}
-        contentContainerStyle={{ gap: 16 }}
-        renderItem={({ item }) => {
-          return (
-            <Pressable onPress={() => router.push(`/reviews/${item.id}`)}>
-              <Review item={item} />
-            </Pressable>
-          );
-        }}
-        keyExtractor={(item) => item.id + item.score}
-      />
+      {data.reviews.length === 0 ? (
+        <View className="flex-1 items-center justify-center bg-base">
+          <CustomText variant="h4" className="text-baseLight">
+            No reviews yet
+          </CustomText>
+        </View>
+      ) : (
+        <FlatList
+          data={data.reviews}
+          contentContainerStyle={{ gap: 16 }}
+          renderItem={({ item }) => {
+            return (
+              <Pressable onPress={() => router.push(`/reviews/${item.id}`)}>
+                <Review item={item} />
+              </Pressable>
+            );
+          }}
+          keyExtractor={(item) => item.id + item.score}
+        />
+      )}
       {!data.userHasReviewed && (
         <Pressable
           onPress={() => reviewSheetRef.current.expand()}
@@ -99,7 +111,11 @@ const ReviewsScreen = ({ id, haveEdited }) => {
           </CustomText>
         </Pressable>
       )}
-      <CreateReviewBottomSheet id={id} ref={reviewSheetRef} />
+      <CreateReviewBottomSheet
+        id={id}
+        mediaType={segments[1]}
+        ref={reviewSheetRef}
+      />
     </View>
   );
 };
