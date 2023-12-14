@@ -1,24 +1,7 @@
-import { FilmGrid } from "../../../../components";
-import { useTrendingPaginatedQuery } from "../../../../queries/useTrendingQuery";
+import { MediaGrid } from "../../../../components";
 
 const all = () => {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useTrendingPaginatedQuery("all", "day");
-
-  const loadMore = () => {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  };
-  return (
-    <FilmGrid
-      data={data}
-      isLoading={isLoading}
-      loadMore={loadMore}
-      isFetchingNextPage={isFetchingNextPage}
-      chip
-    />
-  );
+  return <MediaGrid type="all" time="day" />;
 };
 
 export default all;

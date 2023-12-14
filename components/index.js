@@ -12,6 +12,7 @@ import SearchBar from "./SearchBar";
 import CastList from "./CastList";
 import CustomBottomSheet from "./CustomBottomSheet";
 import CreateReviewBottomSheet from "./CreateReviewBottomSheet";
+import MediaGrid from "./MediaGrid";
 
 export {
   CustomText,
@@ -28,4 +29,5 @@ export {
   CastList,
   CustomBottomSheet,
   CreateReviewBottomSheet,
+  MediaGrid
 };

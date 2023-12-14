@@ -17,7 +17,7 @@ const search = () => {
     useSearchQuery(debouncedSearchQuery);
 
   const loadMore = () => {
-    if (hasNextPage) {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   };

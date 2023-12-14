@@ -7,6 +7,7 @@ export const getTrending = async (type, time) => {
 
 export const getTrendingPaginated = async (type, time, pageParam) => {
   const response = await api.get(`/trending/${type}/${time}?page=${pageParam}`);
+
   return response.data.data;
 };
 
