@@ -5,9 +5,9 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   darkMode: "class",
   content: [
-    "app/**/*.{js,jsx}",
-    "components/**/*.{js,jsx}",
-    "screens/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./screens/**/*.{js,jsx}",
   ],
   presets: [require("nativewind/preset")],
   theme: {

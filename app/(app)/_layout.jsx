@@ -46,6 +46,22 @@ const AppLayout = () => {
           headerTitle: "Reviews",
         }}
       />
+      <Stack.Screen
+        name="reviews/[id]"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerTitle: "Review",
+        }}
+      />
+      <Stack.Screen
+        name="comments/[id]"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerTitle: "Comment",
+        }}
+      />
     </Stack>
   );
 };

@@ -13,6 +13,8 @@ import CastList from "./CastList";
 import CustomBottomSheet from "./CustomBottomSheet";
 import CreateReviewBottomSheet from "./CreateReviewBottomSheet";
 import MediaGrid from "./MediaGrid";
+import Review from "./Review";
+import Comment from "./Comment";
 
 export {
   CustomText,
@@ -29,5 +31,7 @@ export {
   CastList,
   CustomBottomSheet,
   CreateReviewBottomSheet,
-  MediaGrid
+  MediaGrid,
+  Review,
+  Comment,
 };

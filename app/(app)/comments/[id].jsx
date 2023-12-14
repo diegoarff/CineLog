@@ -1,13 +1,27 @@
-import { Text, View } from "react-native";
-import React from "react";
 import { useLocalSearchParams } from "expo-router";
+import {
+  useCommentQuery,
+  useCommentsQuery,
+} from "../../../queries/useMediaReviewsQuery";
+import ReviewCommentDetailScreen from "../../../screens/ReviewCommentDetailScreen";
 
 const CommentDetails = () => {
   const { id } = useLocalSearchParams();
+
+  const { data, isLoading } = useCommentQuery(id);
+  const { data: comments, isLoading: isLoadingComments } = useCommentsQuery(
+    "comment",
+    id,
+  );
+
   return (
-    <View>
-      <Text>CommentDetails of comment: {id}</Text>
-    </View>
+    <ReviewCommentDetailScreen
+      type="comment"
+      isLoading={isLoading}
+      data={data}
+      comments={comments}
+      isLoadingComments={isLoadingComments}
+    />
   );
 };
 

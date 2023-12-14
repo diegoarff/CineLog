@@ -49,3 +49,23 @@ export const createReview = async (data) => {
   });
   return response.data.data;
 };
+
+export const createComment = async (data) => {
+  const response = await api.post(`/comment/create`, data);
+  return response.data.data;
+};
+
+export const getComments = async (type, id) => {
+  const response = await api.get(`/comment/${type}/${id}`);
+  return response.data.data;
+};
+
+export const getReview = async (id) => {
+  const response = await api.get(`/review/detail/${id}`);
+  return response.data.data;
+};
+
+export const getComment = async (id) => {
+  const response = await api.get(`/comment/detail/${id}`);
+  return response.data.data;
+};
