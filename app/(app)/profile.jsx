@@ -5,8 +5,9 @@ import {
   ToastAndroid,
   Image,
   Alert,
+  Pressable,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import {
   useUserQuery,
@@ -15,14 +16,24 @@ import {
   useUpdateProfileMutation,
 } from "../../queries/useUserQuery";
 import { useForm } from "react-hook-form";
-import { CustomButton, CustomInput, CustomText } from "../../components";
+import {
+  CustomButton,
+  CustomInput,
+  CustomText,
+  AvatarChooseBottomSheet,
+} from "../../components";
 import colors from "tailwindcss/colors";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 const profile = () => {
   const { onLogout } = useAuth();
   const { data, isLoading } = useUserQuery();
+  const [avatar, setAvatar] = useState(
+    "https://firebasestorage.googleapis.com/v0/b/ramble-322a6.appspot.com/o/test%2F1698975678282.jpeg?alt=media&token=c9a7b759-be64-4a3e-aa5b-b932c7b7159f",
+  );
+  const sheetRef = useRef(null);
 
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -47,7 +58,7 @@ const profile = () => {
 
   const handleUpdateProfile = (formData) => {
     updateProfileMutation.mutate(
-      { username: formData.username, avatar: data?.avatar },
+      { username: formData.username, avatar },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -99,7 +110,8 @@ const profile = () => {
     reset({
       username: data?.username,
     });
-  }, [isLoading]);
+    setAvatar(data?.avatar);
+  }, [isLoading, data]);
 
   if (isLoading) {
     return (
@@ -120,10 +132,20 @@ const profile = () => {
             You can change your username and avatar here
           </CustomText>
           <View className="mt-4 items-center">
-            <Image
-              source={{ uri: data?.avatar }}
-              className="mb-6 aspect-square w-36 rounded-full"
-            />
+            <View className="relative">
+              <Image
+                source={{ uri: avatar }}
+                className="mb-6 aspect-square w-36 rounded-full"
+              />
+              <Pressable
+                className="absolute right-0 top-0 aspect-square w-12 items-center justify-center rounded-full bg-accent"
+                onPress={() => {
+                  sheetRef.current.expand();
+                }}
+              >
+                <Ionicons name="pencil" size={24} color={colors.zinc[200]} />
+              </Pressable>
+            </View>
             <CustomInput
               name="username"
               placeholder="Username"
@@ -221,6 +243,11 @@ const profile = () => {
           </View>
         </View>
       </View>
+      <AvatarChooseBottomSheet
+        ref={sheetRef}
+        selectedAvatar={avatar}
+        onAvatarSelection={(avatar) => setAvatar(avatar)}
+      />
     </ScrollView>
   );
 };

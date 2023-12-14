@@ -16,6 +16,7 @@ import MediaGrid from "./MediaGrid";
 import Review from "./Review";
 import Comment from "./Comment";
 import CreateCommentBottomSheet from "./CreateCommentBottomSheet";
+import AvatarChooseBottomSheet from "./AvatarChooseBottomSheet";
 
 export {
   CustomText,
@@ -36,4 +37,5 @@ export {
   Review,
   Comment,
   CreateCommentBottomSheet,
+  AvatarChooseBottomSheet,
 };
