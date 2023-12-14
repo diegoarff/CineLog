@@ -40,7 +40,7 @@ const Review = ({ item }) => {
                 key={idx}
                 name="star"
                 size={16}
-                color={idx < item.score ? colors.teal[500] : colors.zinc[700]}
+                color={idx < item.score ? colors.amber[500] : colors.zinc[700]}
               />
             ))}
           </View>

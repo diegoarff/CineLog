@@ -1,5 +1,11 @@
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { View, ActivityIndicator, Image, Pressable } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  Image,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useDetailsQuery } from "../../../../queries/useDetailsQuery";
 import YoutubePlayer from "react-native-youtube-iframe";
@@ -18,13 +24,14 @@ const MovieDetails = () => {
   const router = useRouter();
 
   const [showTrailer, setShowTrailer] = useState(false);
+  const [videoKey, setVideoKey] = useState("");
 
   const scrollRef = useAnimatedRef();
   const scrollOffset = useScrollViewOffset(scrollRef);
 
   const headerAnimatedStyle = useAnimatedStyle(() => {
     return {
-      opacity: interpolate(scrollOffset.value, [0, 150], [0, 1]),
+      opacity: interpolate(scrollOffset.value, [0, 200], [0, 1]),
     };
   });
 
@@ -88,7 +95,7 @@ const MovieDetails = () => {
 
             <View className="-mt-12 flex-1 px-4 pb-8">
               {/* POSTER AND HEADER INFO */}
-              <View className={`${showTrailer ? "mb-6" : ""} flex-row gap-8`}>
+              <View className="flex-row gap-8">
                 <Image
                   source={{
                     uri:
@@ -109,35 +116,15 @@ const MovieDetails = () => {
                       </CustomText>
                     )}
                   </View>
-                  <View className="flex-row justify-around">
-                    <CustomText
-                      variant="button"
-                      className=" self-start rounded-full bg-baseDark px-4 py-2 text-baseLight"
-                    >
-                      {data.year}
-                    </CustomText>
-                    <CustomText
-                      variant="button"
-                      className=" self-start rounded-full bg-accentDark px-4 py-2 text-light"
-                      onPress={() => setShowTrailer((prev) => !prev)}
-                    >
-                      {showTrailer ? "HIDE PLAYER" : "SEE TRAILER"}
-                    </CustomText>
-                  </View>
+
+                  <CustomText
+                    variant="button"
+                    className=" self-start rounded-full bg-baseDark px-4 py-2 text-baseLight"
+                  >
+                    {data.year}
+                  </CustomText>
                 </View>
               </View>
-
-              {/* TRAILER */}
-              {showTrailer && (
-                <View className="aspect-[16/9] overflow-hidden rounded-xl">
-                  <YoutubePlayer
-                    videoId={data.trailer.split("=")[1]}
-                    height="100%"
-                    webViewStyle={{ opacity: 0.99 }}
-                    resumePlayAndroid={false}
-                  />
-                </View>
-              )}
 
               {/* SECTIONS */}
               <View className="mt-6 gap-6">
@@ -169,6 +156,56 @@ const MovieDetails = () => {
                   </View>
                 </View>
 
+                {/* VIDEOS */}
+                <View className="gap-2">
+                  <CustomText variant="button" className="text-baseMedium">
+                    VIDEOS
+                  </CustomText>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ gap: 16, paddingVertical: 4 }}
+                  >
+                    {data.videos.map((video) => (
+                      <Pressable
+                        key={video.key}
+                        onPress={() => {
+                          if (showTrailer && videoKey === video.key) {
+                            setShowTrailer(false);
+                            setVideoKey("");
+                          } else {
+                            setVideoKey(video.key);
+                            setShowTrailer(true);
+                          }
+                        }}
+                      >
+                        <CustomText
+                          variant="button"
+                          className={`rounded-full border capitalize text-baseLight ${
+                            showTrailer && videoKey === video.key
+                              ? "border-accentDark bg-accentDark text-light"
+                              : "border-accentDark"
+                          } px-4 py-2 `}
+                        >
+                          {video.name}
+                        </CustomText>
+                      </Pressable>
+                    ))}
+                  </ScrollView>
+
+                  {/* TRAILER */}
+                  {showTrailer && (
+                    <View className="aspect-[16/9] overflow-hidden rounded-xl">
+                      <YoutubePlayer
+                        videoId={videoKey}
+                        height="100%"
+                        webViewStyle={{ opacity: 0.99 }}
+                        resumePlayAndroid={false}
+                      />
+                    </View>
+                  )}
+                </View>
+
                 {/* CAST */}
                 <View className="gap-4">
                   <CustomText variant="button" className="text-baseMedium">
@@ -183,6 +220,68 @@ const MovieDetails = () => {
                     </CustomText>
                   )}
                 </View>
+
+                {/* REVIEW SCORES */}
+                <Pressable
+                  onPress={() => router.push(`/movie/${data._id}/reviews`)}
+                >
+                  <View className="gap-2">
+                    <CustomText variant="button" className="text-baseMedium">
+                      REVIEW SCORES
+                    </CustomText>
+                    <View className="flex-row gap-4">
+                      <View className="flex-1 items-center gap-4 rounded-lg bg-baseDark py-4">
+                        <CustomText variant="button" className="text-baseLight">
+                          CRITICS
+                        </CustomText>
+                        <View className="items-center">
+                          <View className="flex-row gap-2">
+                            <CustomText variant="h1" className="text-accent">
+                              {data.criticScoreAvg}
+                            </CustomText>
+                            <Ionicons
+                              name="star"
+                              size={20}
+                              color={colors.amber[500]}
+                              className="mt-2"
+                            />
+                          </View>
+                          <CustomText
+                            variant="body2"
+                            className="text-baseLight"
+                          >
+                            {data.criticReviewCount} reviews
+                          </CustomText>
+                        </View>
+                      </View>
+
+                      <View className="flex-1 items-center gap-4 rounded-lg bg-baseDark py-4">
+                        <CustomText variant="button" className="text-baseLight">
+                          USERS
+                        </CustomText>
+                        <View className="items-center">
+                          <View className="flex-row gap-2">
+                            <CustomText variant="h1" className="text-accent">
+                              {data.userScoreAvg}
+                            </CustomText>
+                            <Ionicons
+                              name="star"
+                              size={20}
+                              color={colors.amber[500]}
+                              className="mt-2"
+                            />
+                          </View>
+                          <CustomText
+                            variant="body2"
+                            className="text-baseLight"
+                          >
+                            {data.userReviewCount} reviews
+                          </CustomText>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </Pressable>
 
                 {/* SIMILAR */}
                 <View className="gap-4">

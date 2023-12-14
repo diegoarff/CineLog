@@ -73,8 +73,8 @@ const CreateReviewBottomSheet = forwardRef(({ id }, ref) => {
           scale={1}
           onChange={handleScoreChange}
           spacing={10}
-          fillColor={colors.teal[500]}
-          touchColor={colors.teal[700]}
+          fillColor={colors.amber[500]}
+          touchColor={colors.amber[700]}
         />
         <CustomText variant="h5" className="text-baseLight">
           Score of {score}/5
