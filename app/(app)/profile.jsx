@@ -231,14 +231,17 @@ const profile = () => {
             Account
           </CustomText>
 
-          <View className="mt-4 gap-4">
+          <View className="mt-4 gap-8">
             <CustomButton label="Logout" onPress={onLogout} variant="outline" />
-            <View>
+            <View className="gap-4">
               <CustomButton
                 label="Delete account"
                 onPress={handleDeleteProfile}
                 variant="danger"
               />
+              <CustomText variant="h6" className="mb-2 text-baseMedium">
+                WARNING! Deleting your account will erase all your reviews and comments from the application. This action is irreversible.
+              </CustomText>
             </View>
           </View>
         </View>
