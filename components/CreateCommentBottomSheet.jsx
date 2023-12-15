@@ -1,4 +1,4 @@
-import { View, Pressable, TextInput } from "react-native";
+import { View, Pressable, TextInput, Keyboard } from "react-native";
 import { forwardRef, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import colors from "tailwindcss/colors";
@@ -19,6 +19,7 @@ const CreateCommentBottomSheet = forwardRef(({ isReplyTo, type }, ref) => {
       { isReplyTo, type, content },
       {
         onSuccess: (data) => {
+          Keyboard.dismiss();
           ref.current.close();
           setContent("");
           queryClient.setQueryData(["comments", type, isReplyTo], (oldData) => {
@@ -62,16 +63,16 @@ const CreateCommentBottomSheet = forwardRef(({ isReplyTo, type }, ref) => {
         <CustomText variant="h6" className="text-baseLight">
           Comment
         </CustomText>
-        <View className="flex-1 rounded-lg border border-teal-700 p-4">
-          <TextInput
-            value={content}
-            onChangeText={setContent}
-            placeholder="Begin writing your comment..."
-            placeholderTextColor={colors.teal[700]}
-            multiline
-            className="w-full font-interRegular text-lg text-baseLight"
-          />
-        </View>
+
+        <TextInput
+          value={content}
+          onChangeText={setContent}
+          placeholder="Begin writing your comment..."
+          placeholderTextColor={colors.teal[700]}
+          multiline
+          className="w-full flex-1 rounded-lg border border-teal-700 p-4 align-top font-interRegular text-lg text-baseLight"
+        />
+
         <Pressable
           disabled={createCommentMutation.isPending}
           onPress={handleCommentCreate}

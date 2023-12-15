@@ -28,6 +28,7 @@ const AppLayout = () => {
         options={{
           headerStyle: { backgroundColor: "#101015" },
           headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           headerTitle: "Profile",
         }}
       />
@@ -36,6 +37,7 @@ const AppLayout = () => {
         options={{
           headerStyle: { backgroundColor: "#101015" },
           headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           headerTitle: "Reviews",
         }}
       />
@@ -44,6 +46,7 @@ const AppLayout = () => {
         options={{
           headerStyle: { backgroundColor: "#101015" },
           headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           headerTitle: "Reviews",
         }}
       />
@@ -52,6 +55,7 @@ const AppLayout = () => {
         options={{
           headerStyle: { backgroundColor: "#101015" },
           headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           headerTitle: "Review",
         }}
       />
@@ -60,6 +64,7 @@ const AppLayout = () => {
         options={{
           headerStyle: { backgroundColor: "#101015" },
           headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
           headerTitle: "Comment",
         }}
       />

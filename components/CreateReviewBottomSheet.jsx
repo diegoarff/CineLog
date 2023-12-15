@@ -1,7 +1,7 @@
 import { useMemo, forwardRef, useState, useCallback } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import colors from "tailwindcss/colors";
-import { Pressable, TextInput, View } from "react-native";
+import { Pressable, TextInput, View, Keyboard } from "react-native";
 import CustomText from "./CustomText";
 import { Rating } from "@kolking/react-native-rating";
 import { useCreateReviewMutation } from "../queries/useMediaReviewsQuery";
@@ -28,6 +28,7 @@ const CreateReviewBottomSheet = forwardRef(({ id, mediaType }, ref) => {
       { id, score, content },
       {
         onSuccess: (data) => {
+          Keyboard.dismiss();
           ref.current.close();
           queryClient.setQueryData(["reviews", id], (oldData) => {
             return {
@@ -86,16 +87,16 @@ const CreateReviewBottomSheet = forwardRef(({ id, mediaType }, ref) => {
         <CustomText variant="h6" className="text-baseLight">
           Review
         </CustomText>
-        <View className="flex-1 rounded-lg border border-teal-700 p-4">
-          <TextInput
-            value={content}
-            onChangeText={setContent}
-            placeholder="Begin writing your review..."
-            placeholderTextColor={colors.teal[700]}
-            multiline
-            className="w-full font-interRegular text-lg text-baseLight"
-          />
-        </View>
+
+        <TextInput
+          value={content}
+          onChangeText={setContent}
+          placeholder="Begin writing your review..."
+          placeholderTextColor={colors.teal[700]}
+          multiline
+          className="w-full flex-1 rounded-lg border border-teal-700 p-4 align-top font-interRegular text-lg text-baseLight"
+        />
+
         <Pressable
           disabled={createReviewMutation.isPending}
           onPress={handleReviewCreate}
