@@ -41,7 +41,7 @@ const CastList = ({ data }) => {
       horizontal
       contentContainerStyle={{ gap: 12 }}
       renderItem={({ item }) => <CastItem item={item} />}
-      keyExtractor={(item) => item.id + item.name}
+      keyExtractor={(item) => item.id + item.character}
     />
   );
 };

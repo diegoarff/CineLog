@@ -207,39 +207,45 @@ const DetailsScreen = ({ mediaType, id }) => {
                   <CustomText variant="button" className="text-baseMedium">
                     VIDEOS
                   </CustomText>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ gap: 16, paddingVertical: 4 }}
-                  >
-                    {data.videos
-                      .filter((video) => !video.name.includes("(removed)"))
-                      .map((video) => (
-                        <Pressable
-                          key={video.key}
-                          onPress={() => {
-                            if (showTrailer && videoKey === video.key) {
-                              setShowTrailer(false);
-                              setVideoKey("");
-                            } else {
-                              setVideoKey(video.key);
-                              setShowTrailer(true);
-                            }
-                          }}
-                        >
-                          <CustomText
-                            variant="button"
-                            className={`rounded-full border capitalize text-baseLight ${
-                              showTrailer && videoKey === video.key
-                                ? "border-accentDark bg-accentDark text-light"
-                                : "border-accentDark"
-                            } px-4 py-2 `}
+                  {data.videos && data.videos.length > 0 ? (
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      contentContainerStyle={{ gap: 16, paddingVertical: 4 }}
+                    >
+                      {data.videos
+                        .filter((video) => !video.name.includes("(removed)"))
+                        .map((video) => (
+                          <Pressable
+                            key={video.key}
+                            onPress={() => {
+                              if (showTrailer && videoKey === video.key) {
+                                setShowTrailer(false);
+                                setVideoKey("");
+                              } else {
+                                setVideoKey(video.key);
+                                setShowTrailer(true);
+                              }
+                            }}
                           >
-                            {video.name}
-                          </CustomText>
-                        </Pressable>
-                      ))}
-                  </ScrollView>
+                            <CustomText
+                              variant="button"
+                              className={`rounded-full border capitalize text-baseLight ${
+                                showTrailer && videoKey === video.key
+                                  ? "border-accentDark bg-accentDark text-light"
+                                  : "border-accentDark"
+                              } px-4 py-2 `}
+                            >
+                              {video.name}
+                            </CustomText>
+                          </Pressable>
+                        ))}
+                    </ScrollView>
+                  ) : (
+                    <CustomText className="text-baseLight">
+                      No videos found
+                    </CustomText>
+                  )}
 
                   {/* TRAILER */}
                   {showTrailer && (
