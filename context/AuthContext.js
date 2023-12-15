@@ -42,6 +42,7 @@ export function AuthProvider({ children }) {
       setHeaderToken(token);
       await setToken(token);
 
+      ToastAndroid.show("Login successfull", ToastAndroid.SHORT);
       return response.data.data;
     } catch (error) {
       ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);

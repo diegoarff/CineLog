@@ -53,6 +53,7 @@ const Discover = () => {
     switch (valueToChange) {
       case "type":
         setSelectedType(value);
+        setSelectedGenre(options.genre[value.value][0]);
         break;
       case "sort":
         setSelectedSort(value);
