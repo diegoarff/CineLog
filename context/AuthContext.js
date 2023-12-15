@@ -21,6 +21,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [[isLoading, token], setToken] = useStorageState("token");
+  const [[isUserLoading, userId], setUserId] = useStorageState("userId");
 
   // Check if the token is expired
   useEffect(() => {
@@ -38,9 +39,10 @@ export function AuthProvider({ children }) {
   const login = async (data) => {
     try {
       const response = await api.post("/auth/signin", data);
-      const { token } = response.data.data;
+      const { token, userId } = response.data.data;
       setHeaderToken(token);
       await setToken(token);
+      await setUserId(userId);
 
       ToastAndroid.show("Login successfull", ToastAndroid.SHORT);
       return response.data.data;
@@ -61,11 +63,14 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     removeHeaderToken();
     await setToken(null);
+    await setUserId(null);
   };
 
   const value = {
     token,
     isLoading,
+    userId,
+    isUserLoading,
     onLogin: login,
     onRegister: register,
     onLogout: logout,

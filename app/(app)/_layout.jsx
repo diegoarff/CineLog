@@ -68,6 +68,14 @@ const AppLayout = () => {
           headerTitle: "Comment",
         }}
       />
+      <Stack.Screen
+        name="chat/[id]"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
+        }}
+      />
     </Stack>
   );
 };
