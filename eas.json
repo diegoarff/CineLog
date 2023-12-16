@@ -15,9 +15,16 @@
     "preview": {
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://cinelog-backend-api.onrender.com"
       }
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://cinelog-backend-api.onrender.com"
+      }
+    }
   },
   "submit": {
     "production": {}
