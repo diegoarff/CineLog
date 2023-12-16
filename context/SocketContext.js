@@ -7,7 +7,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://192.168.1.103:4000", {
+    const newSocket = io(process.env.EXPO_PUBLIC_API_URL, {
       transports: ["websocket"],
     });
 
