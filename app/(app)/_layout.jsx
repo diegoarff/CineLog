@@ -77,6 +77,24 @@ const AppLayout = () => {
           headerTitle: "Chat",
         }}
       />
+      <Stack.Screen
+        name="user/[id]"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
+          headerTitle: "User",
+        }}
+      />
+      <Stack.Screen
+        name="private_chat/[id]"
+        options={{
+          headerStyle: { backgroundColor: "#101015" },
+          headerTintColor: colors.zinc[200],
+          headerShadowVisible: false,
+          headerTitle: "Private",
+        }}
+      />
     </Stack>
   );
 };

@@ -4,13 +4,15 @@ import {
   updateProfile,
   deleteProfile,
   changePassword,
+  getUser,
 } from "../api/functions";
 import { ToastAndroid } from "react-native";
 
-export const useUserQuery = () => {
+export const useProfileQuery = () => {
   return useQuery({
-    queryKey: ["user"],
+    queryKey: ["me"],
     queryFn: getProfile,
+    gcTime: 0,
   });
 };
 
@@ -40,3 +42,10 @@ export const useChangePasswordMutation = () => {
     },
   });
 };
+
+export const useUserQuery = (id) => {
+  return useQuery({
+    queryKey: ["user", id],
+    queryFn: () => getUser(id),
+  });
+}

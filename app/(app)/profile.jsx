@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import {
-  useUserQuery,
+  useProfileQuery,
   useChangePasswordMutation,
   useDeleteProfileMutation,
   useUpdateProfileMutation,
@@ -29,7 +29,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const profile = () => {
   const { onLogout } = useAuth();
-  const { data, isLoading } = useUserQuery();
+  const { data, isLoading } = useProfileQuery();
   const [avatar, setAvatar] = useState(
     "https://firebasestorage.googleapis.com/v0/b/ramble-322a6.appspot.com/o/test%2F1698975678282.jpeg?alt=media&token=c9a7b759-be64-4a3e-aa5b-b932c7b7159f",
   );
@@ -61,7 +61,7 @@ const profile = () => {
       { username: formData.username, avatar },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["user"] });
+          queryClient.invalidateQueries({ queryKey: ["me"] });
           ToastAndroid.show("Profile updated succesfully", ToastAndroid.SHORT);
           router.replace("/(tabs)/home");
         },
@@ -240,7 +240,8 @@ const profile = () => {
                 variant="danger"
               />
               <CustomText variant="h6" className="mb-2 text-baseMedium">
-                WARNING! Deleting your account will erase all your reviews and comments from the application. This action is irreversible.
+                WARNING! Deleting your account will erase all your reviews and
+                comments from the application. This action is irreversible.
               </CustomText>
             </View>
           </View>

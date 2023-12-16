@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { publicChats } from "../../../utils/publicChats";
 import { CustomText } from "../../../components";
 import { useEffect, useRef, useState } from "react";
@@ -20,6 +20,8 @@ const ChatDetails = () => {
   const { id: chatId } = useLocalSearchParams();
   const { socket } = useSocket();
   const { isUserLoading, userId } = useAuth();
+
+  const router = useRouter();
 
   const scrollViewRef = useRef();
 
@@ -106,21 +108,38 @@ const ChatDetails = () => {
                   className={`flex-row ${isMe ? "justify-end" : "gap-4"}`}
                 >
                   {!isMe && (
-                    <Image
-                      source={{ uri: message.userId.avatar }}
-                      className="aspect-square h-12 rounded-full"
-                    />
+                    <Pressable
+                      onPress={() =>
+                        router.push(`/(app)/user/${message.userId._id}`)
+                      }
+                    >
+                      <Image
+                        source={{ uri: message.userId.avatar }}
+                        className="aspect-square h-12 rounded-full"
+                      />
+                    </Pressable>
                   )}
                   <View
                     className={`rounded-lg px-3 py-2 ${
                       isMe ? "bg-accentDark" : "bg-baseDark"
                     }`}
                   >
-                    {!isMe && (
-                      <CustomText variant="h6" className=" text-accentDark">
-                        {message.userId.username}
-                      </CustomText>
-                    )}
+                    <View className="flex-row items-center gap-3">
+                      {!isMe && (
+                        <CustomText variant="h6" className=" text-accentDark">
+                          {message.userId.username}
+                        </CustomText>
+                      )}
+                      {message.userId.critic && (
+                        <CustomText
+                          variant="chip"
+                          className="items-center justify-center rounded-full bg-accentDark px-2 py-1 text-light"
+                        >
+                          CRITIC
+                        </CustomText>
+                      )}
+                    </View>
+
                     <CustomText className="text-light">
                       {message.content}
                     </CustomText>
