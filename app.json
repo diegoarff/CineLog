@@ -1,13 +1,35 @@
 {
   "expo": {
-    "scheme": "acme",
+    "name": "Cinelog",
+    "slug": "Cinelog",
+    "scheme": "cinelog",
+    "version": "1.0.0",
+    "userInterfaceStyle": "automatic",
+    "androidStatusBar": {
+      "barStyle": "light-content"
+    },
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0A"
+    },
     "web": {
       "bundler": "metro"
     },
     "plugins": [
       "expo-router"
     ],
-    "name": "cinelog",
-    "slug": "cinelog"
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a3636b80-6967-4380-8a71-a7d1a4cf1259"
+      }
+    },
+    "android": {
+      "package": "com.diegoarf.cinelog"
+    }
   }
 }
