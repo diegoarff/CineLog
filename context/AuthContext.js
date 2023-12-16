@@ -45,6 +45,7 @@ export function AuthProvider({ children }) {
       await setUserId(userId);
 
       ToastAndroid.show("Login successfull", ToastAndroid.SHORT);
+      
       return response.data.data;
     } catch (error) {
       ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);
@@ -53,7 +54,10 @@ export function AuthProvider({ children }) {
   };
   const register = async (data) => {
     try {
-      return await api.post("/auth/signup", data);
+      const response = await api.post("/auth/signup", data);
+      ToastAndroid.show("Registration successfull", ToastAndroid.SHORT);
+
+      return response.data.data;
     } catch (error) {
       ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);
       return { error: true, message: error.response.data.message };

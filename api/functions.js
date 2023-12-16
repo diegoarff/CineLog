@@ -157,3 +157,12 @@ export const deleteProfile = async () => {
     throw new Error(`Error deleting profile: ${error.response.data.message}`);
   }
 };
+
+export const getChat = async (id) => {
+  try {
+    const response = await api.get(`/chat/${id}`);
+    return response.data.data;
+  } catch (error) {
+    throw new Error(`Error getting chat: ${error.response.data.message}`);
+  }
+};

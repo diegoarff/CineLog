@@ -13,14 +13,6 @@ export const SocketProvider = ({ children }) => {
 
     setSocket(newSocket);
 
-    newSocket.io.on("connect_error", (err) => {
-      console.log(err.message);
-    });
-
-    newSocket.on("connect", () => {
-      console.log("connected");
-    });
-
     return () => {
       newSocket.disconnect();
     };

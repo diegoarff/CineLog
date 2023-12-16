@@ -74,6 +74,7 @@ const AppLayout = () => {
           headerStyle: { backgroundColor: "#101015" },
           headerTintColor: colors.zinc[200],
           headerShadowVisible: false,
+          headerTitle: "Chat",
         }}
       />
     </Stack>
